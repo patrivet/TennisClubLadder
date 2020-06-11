@@ -17,7 +17,7 @@ async function postLadder (req, res) {
     if (!name) {
       throw new Error('one or more parameters for POST /ladder were missing');
     }
-    const ladder = await ladderModel.create({name});
+    const ladder = await ladderModel.create(req.body);
     res.status(200);
     res.json(ladder);
   } catch (error) {

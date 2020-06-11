@@ -3,6 +3,9 @@ const Schema = db.Schema;
 
 // Challenge Model ==========================
 var ChallengeSchema = new Schema({
+  id: {
+    type: String, required: true
+  },
   created: {
     type: Date,
     required: true,
@@ -44,6 +47,9 @@ const challengeModel = db.model("Challenge", ChallengeSchema);
 
 // Player Model ==========================
 const PlayerSchema = new Schema({
+  id: {
+    type: String, required: true
+  },
   firstName: {
     type: String, required: true
   },
@@ -62,7 +68,11 @@ const PlayerSchema = new Schema({
   },
   challengeIds: {
     type: [String], required: false
-  }
+  },
+  position: { type: Number, required: false },
+  numWins: { type: Number, required: false },
+  // Note: can use shorthand->  numWins: Number,
+  numLosses: { type: Number, required: false }
 });
 const playerModel = db.model('Player', PlayerSchema);
 
