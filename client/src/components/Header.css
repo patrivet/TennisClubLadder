@@ -1,0 +1,26 @@
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.headerLogoContainer {
+}
+
+.headerTitle {
+}
+
+.headerLogo {
+  width: 65px;
+  height: 65px;
+  cursor: pointer;
+}
+
+.logoutContainer {
+}
+
+.logoutImage {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
