@@ -9,7 +9,7 @@ var ChallengeSchema = new Schema({
   created: {
     type: Date,
     required: true,
-    default: Date.now
+    default: Date.now()
   },
   invitationStatus: {
     type: String,
@@ -21,13 +21,28 @@ var ChallengeSchema = new Schema({
     required: false,
     default: 'n/a'
   },
+  status: {   // this replaces, and merges, invitationStatus and resultStatus into one field.
+  // Values move from: invited --> inviteAccepted / inviteDeclined / inviteExpired --> [ scheduled ]  --> complete --> challengeExpired.
+    type: String,
+    required: false,
+    default: 'invited'
+  },
+  // Creator is a player ID (aka "challenger")
+  creator: {
+    type: String,
+    required: false
+  },
+  // challenged is a player ID (the challenged player)
+  challenged: {
+    type: String,
+    required: false
+  },
   // Winner is a player ID
   winner: {
     type: String,
     required: false
   },
-  // Creator is a player ID
-  creator: {
+  loser: {
     type: String,
     required: false
   },
@@ -41,7 +56,16 @@ var ChallengeSchema = new Schema({
   },
   playerIds: {
     type: [String], required: true
-  }
+  },
+  lastUpdated: {
+    type: Date,
+    required: true,
+    default: Date.now()
+  },
+  statusSummaryText: {
+    type: String,
+    required: false
+  },
 });
 const challengeModel = db.model("Challenge", ChallengeSchema);
 
@@ -72,7 +96,8 @@ const PlayerSchema = new Schema({
   position: { type: Number, required: false },
   numWins: { type: Number, required: false },
   // Note: can use shorthand->  numWins: Number,
-  numLosses: { type: Number, required: false }
+  numLosses: { type: Number, required: false },
+  imagePath: { type: String, required: false }
 });
 const playerModel = db.model('Player', PlayerSchema);
 

@@ -3,7 +3,7 @@ const baseUrl = 'http://localhost:3001';
 
 export default {
   // GET ladders
-  getLadder() {
+  getLadders() {
     return fetch(`${baseUrl}/ladders`)
       .then(res => res.status <= 400 ? res : Promise.reject(res))
       .then(res => res.json())

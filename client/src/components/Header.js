@@ -6,13 +6,13 @@ export default function Header() {
   return (
     <div className="headerContainer">
       <div className="headerLogoContainer">
-        <img src={logo} className="headerLogo"></img>
+        <img alt="ATP Cup logo" src={logo} className="headerLogo"></img>
       </div>
       <div className="headerTitle">
         Santa Monica TC Ladder
       </div>
       <div className="logoutContainer">
-        <img src={logoutImage} className="logoutImage"></img>
+        <img alt="logout" src={logoutImage} className="logoutImage"></img>
       </div>
 
     </div>
