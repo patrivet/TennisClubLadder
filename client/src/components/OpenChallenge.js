@@ -1,20 +1,22 @@
 import React, { useRef, useState } from 'react'
 import Emoji from './Emoij.js';
 
-export default function OpenChallenge({nextChallenge, changeChallengeStatus}) {
+export default function OpenChallenge({loggedInPlayer, nextChallenge, updateChallenge}) {
   const [winner, setWinner] = useState('');
   const [commentary, setCommentary] = useState('');
+  loggedInPlayer = { _id : "5ee24e886eabcbaaa70fbaea" }; // FIX ME - remove this
 
-  /* function to change challengeStatus - passed in from props ^ */
   const handleChallengeChange = (inStatus) => {
     console.log("INFO: openChallenge.js::: running handleChallengeChange");
-    changeChallengeStatus(nextChallenge, inStatus);
+    // Set the new status on the challenge object and call function to write changes to DB and update this.state.
+    nextChallenge.status = inStatus;
+    updateChallenge(nextChallenge);
   }
 
   /* intented to be used by select:case statement inside render() - to replace warning from using current implementation */
   function getChallengeStatus () {
     if (nextChallenge.status == 'invited') {
-      return (nextChallenge.creator == 'me') ? 'invitedByMe' : 'invitedByChallenger';
+      return (nextChallenge.creator._id == loggedInPlayer._id) ? 'invitedByMe' : 'invitedByChallenger';
     } else {
       return nextChallenge.status
     }
@@ -47,7 +49,7 @@ export default function OpenChallenge({nextChallenge, changeChallengeStatus}) {
         <div>No challenge currently set. Pick a new challenger!</div>
 
         /* Invited (Player is the "challenger") */
-        || (nextChallenge.status == 'invited' && nextChallenge.creator == 'me') &&
+        || (nextChallenge.status == 'invited' && nextChallenge.creator._id == loggedInPlayer._id) &&
             <div>
               <p>Challenged {nextChallenge.challenged}</p>
               <p>on {nextChallenge.created}</p>
@@ -55,9 +57,9 @@ export default function OpenChallenge({nextChallenge, changeChallengeStatus}) {
             </div>
 
         /* Invited (by a challenger) */
-        || (nextChallenge.status == 'invited' && nextChallenge.creator != 'me') &&
+        || (nextChallenge.status == 'invited' && nextChallenge.creator._id != loggedInPlayer._id) &&
           <div>
-            <p>Challenged by {nextChallenge.creator}</p>
+            <p>Challenged by {nextChallenge.creator.firstName + nextChallenge.creator.lastName}</p>
             <p>on {nextChallenge.created}</p>
             <button className="accept" onClick={() => handleChallengeChange('inviteAccepted')}>Accept <Emoji symbol="🎾"/></button>
             <button className="decline" onClick={() => handleChallengeChange('inviteDeclined')}>Decline <Emoji symbol="⛔️"/></button>

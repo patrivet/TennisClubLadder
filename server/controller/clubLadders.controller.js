@@ -1,6 +1,10 @@
 const { ladderModel, playerModel, challengeModel } = require('./../model/clubLadders.model');
 
-async function getLadders (_, res) {
+async function getLadders (req, res) {
+  console.log('==========');
+  // console.log(req.query.acceptInvite);
+  console.log(req.params);
+  console.log(req.params);
   try {
     const ladders = await ladderModel.find({});
     res.status(201);

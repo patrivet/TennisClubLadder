@@ -1,9 +1,6 @@
 import React from 'react'
 import moment from 'moment';
 
-
-
-
 export default function Challenge({challenge}) {
   const longDate = moment(challenge.date).format("h:mm a - MMMM Do, YYYY");
   const dayOfMonth = moment(challenge.date).format("Do");
@@ -13,13 +10,10 @@ export default function Challenge({challenge}) {
     switch (challenge.status) {
       case 'invited':
         return '📮';
-        break;
       case 'invitedAccepted':
         return '🤝';
-        break;
       case 'complete':
         return '🏁';
-        break;
     }
   }
 

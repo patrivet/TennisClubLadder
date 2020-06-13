@@ -4,7 +4,7 @@ const Schema = db.Schema;
 // Challenge Model ==========================
 var ChallengeSchema = new Schema({
   id: {
-    type: String, required: true
+    type: String
   },
   created: {
     type: Date,

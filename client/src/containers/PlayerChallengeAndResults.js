@@ -1,23 +1,22 @@
-import React from 'react'
-import OpenChallenge from './../components/OpenChallenge'
-export default function PlayerChallengeAndResults({challenges, changeChallengeStatus}) {
+import React from 'react';
+import OpenChallenge from './../components/OpenChallenge';
 
-  // Determine the player's open (if any) challenge
-  // if there is a challenge - get it's status:::::  and store if player is the challenger or challenged!
-    //  invited (as challenger or challenged)
-    //  inviteAccepted  || inviteDeclined  ||  inviteExpired
-    //      |
-    //  (scheduled) (optional state)
-    //      |
-    //  complete  (result entered)  ||  expired  (result not entered after 2 weeks)
+export default function PlayerChallengeAndResults({loggedInPlayer, challenges, updateChallenge}) {
 
-    // CASE statement for 8 DIVs above. (7 statuses and no challenge booked.)
+  loggedInPlayer = { _id : "5ee24e886eabcbaaa70fbaea" }; // FIX ME - remove this
 
-  // const challenger = true;
-  const nextChallenge = {status: 'invited', creator: 'John Smith', created: Date.now()};
-  // let me = null; // logged in player
-  // const isChallenger = nextChallenge/*.creator*/ == me // ?? ->session.username;
-  // const nextChallengeStatus = 'inviteAccepted';
+  // Determine the player's open (if any) challenge - filter the
+  // FIX ME - not used.. delete ..const nextChallenge = {status: 'invited', creator: 'John Smith', created: Date.now()};
+  const nextChallenge = () => {
+    // this lookup will be quicker: Get the last member in the Player's challengeIds array and check the status etc.
+    const filtered = challenges.filter( (c) =>
+      (c.creator && c.creator == loggedInPlayer._id  || c.challenged && c.challenged == loggedInPlayer._id)
+      &&
+      (c.status == 'invited' || c.status == 'inviteAccepted' || c.status == 'scheduled')
+    );
+    if (filtered.length> 1) console.log('WARNING: Player has more than one challenge is an open state. There should only be 0..1 per player.');
+    return filtered[0]; // return first in array (array should only contain one anyway)
+  }
 
   return (
     <>
@@ -25,7 +24,7 @@ export default function PlayerChallengeAndResults({challenges, changeChallengeSt
         <h3>My next game</h3>
       </div>
       <div className="nextChallenge">
-        <OpenChallenge nextChallenge={nextChallenge} changeChallengeStatus={changeChallengeStatus} />
+        <OpenChallenge loggedInPlayer={loggedInPlayer} nextChallenge={nextChallenge()} updateChallenge={updateChallenge} />
       </div>
       <div className="myResultsLink">
         <h3>My results</h3>
