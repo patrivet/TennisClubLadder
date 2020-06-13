@@ -73,6 +73,7 @@ async function postChallenge (req, res) {
   try {
     // Body will contain the player Ids.
     const challenge = await challengeModel.create(req.body);
+    console.log(req.body);
     res.status(200);
     res.json(challenge);
   } catch (error) {
@@ -83,7 +84,7 @@ async function postChallenge (req, res) {
 }
 
 // Update (PUT) challenge- support any 1..n of the following fields being passed
-// - invitationStatus, resultStatus, winner etc
+// - invitationStatus, resultStatus, winnerId etc
 async function putChallenge (req, res) {
   try {
     const { _id } = req.body;

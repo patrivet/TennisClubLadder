@@ -3,14 +3,15 @@ import OpenChallenge from './../components/OpenChallenge';
 
 export default function PlayerChallengeAndResults({loggedInPlayer, challenges, updateChallenge}) {
 
-  loggedInPlayer = { _id : "5ee24e886eabcbaaa70fbaea" }; // FIX ME - remove this
-
+  //loggedInPlayer = { _id : "5ee24e886eabcbaaa70fbaea" }; // FIX ME - remove this
+  console.log('playerChallengerAndResults.js ....challenges:-');
+  console.log(challenges)
   // Determine the player's open (if any) challenge - filter the
-  // FIX ME - not used.. delete ..const nextChallenge = {status: 'invited', creator: 'John Smith', created: Date.now()};
+  // FIX ME - not used.. delete ..const nextChallenge = {status: 'invited', challengerId: 'John Smith', created: Date.now()};
   const nextChallenge = () => {
     // this lookup will be quicker: Get the last member in the Player's challengeIds array and check the status etc.
     const filtered = challenges.filter( (c) =>
-      (c.creator && c.creator == loggedInPlayer._id  || c.challenged && c.challenged == loggedInPlayer._id)
+      (c.challengerId && c.challengerId == loggedInPlayer._id  || c.challengedId && c.challengedId == loggedInPlayer._id)
       &&
       (c.status == 'invited' || c.status == 'inviteAccepted' || c.status == 'scheduled')
     );

@@ -27,22 +27,38 @@ var ChallengeSchema = new Schema({
     required: false,
     default: 'invited'
   },
-  // Creator is a player ID (aka "challenger")
-  creator: {
+  // challenger is a player ID
+  challengerId: {
     type: String,
     required: false
   },
-  // challenged is a player ID (the challenged player)
+  challenger: {
+    type: Object,
+    required: false
+  },
   challenged: {
+    type: Object,
+    required: false
+  },
+  winner: {
+    type: Object,
+    required: false
+  },
+  loser: {
+    type: Object,
+    required: false
+  },
+  // challengedId is a player ID (the challengedId player)
+  challengedId: {
     type: String,
     required: false
   },
   // Winner is a player ID
-  winner: {
+  winnerId: {
     type: String,
     required: false
   },
-  loser: {
+  loserId: {
     type: String,
     required: false
   },

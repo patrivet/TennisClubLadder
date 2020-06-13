@@ -41,9 +41,12 @@ function App() {
     // Get challenges
     ApiService.getChallenges()
       .then(challenges => {
-        // FIX ME - remove this temp date setting. This is now done in the back-end on creation.
+        // Set the player objects onto the challenges.
         challenges.forEach(c => {
-          c.lastUpdated = Date.now();
+          c.challenger = getPlayerForId(c.challengerId);
+          c.challenged = getPlayerForId(c.challengedId);
+          c.winner = getPlayerForId(c.winnerId);
+          c.loser = getPlayerForId(c.loserId);
         })
         setChallenges(challenges)
       })
@@ -59,11 +62,11 @@ function App() {
     console.log(challenges);
 
     // ======= Update the challenge
-    // 1) set the challenge status
-    // set challenge
-    // 2) set the challenge statusSummaryText  e.g.  "Ken beat Paul"
-    // 3) set lastUpdated (date) to now.
-    // 4) set the winner and loser?
+
+    // ) set the challenge statusSummaryText  e.g.  "Ken beat Paul"
+
+    // set lastUpdated (date) to now.
+    challenge.lastUpdated = Date.now();
 
     // ====== Update the corresponding player fields
     // ====== Update the ladder.
@@ -79,9 +82,12 @@ function App() {
 
     // - create challenge object
     const challengeToCreate = {
-      creator: loggedInPlayer._id,
-      challenged: challengedPlayer._id,
-      playersIds: [loggedInPlayer._id, challengedPlayer._id]
+      challengerId: loggedInPlayer._id,
+      challengedId: challengedPlayer._id,
+      challenger: loggedInPlayer,
+      challenged: challengedPlayer,
+      playersIds: [loggedInPlayer._id, challengedPlayer._id],
+      statusSummaryText : loggedInPlayer.firstName + ' ' + loggedInPlayer.lastName + ' challenged ' + challengedPlayer.firstName + ' ' + challengedPlayer.lastName
     }
     // - call POST challenge passing object
     ApiService.postChallenge(challengeToCreate)
@@ -106,15 +112,23 @@ function App() {
         console.log(`ERROR App.js:: createChallenge() Error =`); console.log(err)
       });
 
-    // FIX ME Send email to challenged player using html template
+    // FIX ME Send email to challengedId player using html template
   }
 
   const setFakeLoggedInPlayer = () => {
     // FIX ME - delete his function and all callers.
-    loggedInPlayer = players[0];
+    loggedInPlayer = players[9];
+    return loggedInPlayer
+  }
+
+  const getPlayerForId = (idToFind) => {
+    let playerFound = players.find(element => element._id == idToFind);
+    if (!playerFound) console.log('WARNING: No player found with _id =', idToFind);
+    return playerFound
   }
 
   return (
+
     <>
       <Header />
       <QuoteRandomiser />
@@ -122,11 +136,11 @@ function App() {
       {/* ---------- MAIN CONTAINER -------------------- */}
       <div className="ladderAndResultsContainer">
         <div className="ladder">
-          <Ladder loggedInPlayer={loggedInPlayer} players={players} createChallenge={createChallenge}></Ladder>
+          <Ladder loggedInPlayer={setFakeLoggedInPlayer} players={players} createChallenge={createChallenge}></Ladder>
         </div>
         <div className="playerAndLadderResults">
           <div className="playerChallengeAndResults">
-            <PlayerChallengeAndResults loggedInPlayer={loggedInPlayer} challenges={challenges} updateChallenge={updateChallenge}></PlayerChallengeAndResults>
+            <PlayerChallengeAndResults loggedInPlayer={setFakeLoggedInPlayer} challenges={challenges} updateChallenge={updateChallenge}></PlayerChallengeAndResults>
           </div>
           <div className="ladderResults">
             <LadderResults challenges={challenges}></LadderResults>
