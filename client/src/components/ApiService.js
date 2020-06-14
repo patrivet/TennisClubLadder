@@ -86,6 +86,24 @@ export default {
         console.log(`ERROR: apiService(): putPlayer() performing POST to URL:${baseUrl}`);
         console.error(error)
       });
+  },
+
+  putChallenge(updatedChallenge) {
+    const headers = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "PUT",
+      body: JSON.stringify(updatedChallenge)
+    }
+    return fetch(`${baseUrl}/challenge`, headers)
+      .then(res => res.status < 400 ? res : Promise.reject(res))
+      .then(res => res.json())
+      .catch((error) => {
+        console.log(`ERROR: apiService(): putChallenge() performing POST to URL:${baseUrl}`);
+        console.error(error)
+      });
   }
 
 }

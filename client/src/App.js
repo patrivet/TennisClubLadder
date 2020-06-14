@@ -41,13 +41,6 @@ function App() {
     // Get challenges
     ApiService.getChallenges()
       .then(challenges => {
-        // Set the player objects onto the challenges.
-        challenges.forEach(c => {
-          c.challenger = getPlayerForId(c.challengerId);
-          c.challenged = getPlayerForId(c.challengedId);
-          c.winner = getPlayerForId(c.winnerId);
-          c.loser = getPlayerForId(c.loserId);
-        })
         setChallenges(challenges)
       })
       .catch( err => { console.log(`ERROR App.js:: useEffect() getChallenges Error =`); console.log(err) } );
@@ -61,16 +54,27 @@ function App() {
     console.log("INFO: app.js::: running updateChallenge");
     console.log(challenges);
 
-    // ======= Update the challenge
-
-    // ) set the challenge statusSummaryText  e.g.  "Ken beat Paul"
-
+    // ======= (1) Update local objects ...(a) Update the challenge
     // set lastUpdated (date) to now.
     challenge.lastUpdated = Date.now();
 
-    // ====== Update the corresponding player fields
+   // FIX ME - to be done - player updates....
+    // ====== (b) player fields
     // ====== Update the ladder.
-    // Update players, ladder and challenge state
+
+
+
+    // ====== (2) DB update::: Update Challenge & player(s) object in DB
+    ApiService.putChallenge(challenge);
+
+
+
+
+    // ====== (3) State update ::: Update players, ladder and challenge state
+    setChallenges( (previousChallenges) => {
+      return [...previousChallenges]
+    });
+
     setPlayers( (previousPlayers) => {
       return [...previousPlayers]
     });
@@ -115,9 +119,11 @@ function App() {
     // FIX ME Send email to challengedId player using html template
   }
 
-  const setFakeLoggedInPlayer = () => {
+  function setFakeLoggedInPlayer () {
     // FIX ME - delete his function and all callers.
-    loggedInPlayer = players[9];
+    // loggedInPlayer = players[0]; // Grant Shields
+    // loggedInPlayer = players[1]; // Luke
+    loggedInPlayer = players[0]; // Nero
     return loggedInPlayer
   }
 
@@ -136,11 +142,11 @@ function App() {
       {/* ---------- MAIN CONTAINER -------------------- */}
       <div className="ladderAndResultsContainer">
         <div className="ladder">
-          <Ladder loggedInPlayer={setFakeLoggedInPlayer} players={players} createChallenge={createChallenge}></Ladder>
+          <Ladder loggedInPlayer={setFakeLoggedInPlayer()} players={players} createChallenge={createChallenge}></Ladder>
         </div>
         <div className="playerAndLadderResults">
           <div className="playerChallengeAndResults">
-            <PlayerChallengeAndResults loggedInPlayer={setFakeLoggedInPlayer} challenges={challenges} updateChallenge={updateChallenge}></PlayerChallengeAndResults>
+            <PlayerChallengeAndResults loggedInPlayer={setFakeLoggedInPlayer()} challenges={challenges} updateChallenge={updateChallenge}></PlayerChallengeAndResults>
           </div>
           <div className="ladderResults">
             <LadderResults challenges={challenges}></LadderResults>

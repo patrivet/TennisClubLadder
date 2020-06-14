@@ -10,8 +10,10 @@ export default function Challenge({challenge}) {
     switch (challenge.status) {
       case 'invited':
         return '📮';
-      case 'invitedAccepted':
+      case 'inviteAccepted':
         return '🤝';
+      case 'inviteDeclined':
+        return '🚫';
       case 'complete':
         return '🏁';
     }

@@ -11,9 +11,9 @@ export default function LadderResults({challenges}) {
       </div>
       <div className="latestResults">
         {challenges
-        .filter( (c) => c.status == 'invited' || c.status == 'inviteAccepted' || c.status == 'complete')
-        .sort( (a, b) =>  a.lastUpdated > b.lastUpdated ? 1 : -1 )
-        .slice(10, 15)
+        .filter( (c) => c.status == 'invited' || c.status == 'inviteAccepted' || c.status == 'inviteDeclined'|| c.status == 'complete')
+        .sort( (a, b) =>  a.lastUpdated < b.lastUpdated ? 1 : -1 )
+        .slice(0, 7)
         .map(challenge => {
           return <Challenge key={challenge._id} challenge={challenge} />
         })}

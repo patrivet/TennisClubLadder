@@ -1,10 +1,22 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react';
 import Emoji from './Emoij.js';
+import moment from 'moment';
 
 export default function OpenChallenge({loggedInPlayer, nextChallenge, updateChallenge}) {
   const [winner, setWinner] = useState('');
   const [commentary, setCommentary] = useState('');
-  //loggedInPlayer = { _id : "5ee24e886eabcbaaa70fbaea" }; // FIX ME - remove this
+  const challengerName = (nextChallenge) ? nextChallenge.challenger.firstName + ' ' + nextChallenge.challenger.lastName : null;
+  const challengedName = (nextChallenge) ? nextChallenge.challenged.firstName + ' ' + nextChallenge.challenged.lastName : null;
+  // FIX ME - why is nextChallenge null?
+  const lastUpdatedFormatted = (nextChallenge) ? moment(nextChallenge.lastUpdated).format("Do") + ' ' + moment(nextChallenge.lastUpdated).format("MMM") : null;
+
+  if (nextChallenge) {
+    console.log('openChallenge.js :::Next Challenge =');
+    console.log(nextChallenge);
+  }
+  else {
+    console.log('openChallenge.js :::Next Challenge is NULL ??');
+  }
 
   const handleChallengeChange = (inStatus) => {
     console.log("INFO: openChallenge.js::: running handleChallengeChange");
@@ -13,11 +25,10 @@ export default function OpenChallenge({loggedInPlayer, nextChallenge, updateChal
 
     // Update status text
     if (inStatus == 'inviteAccepted') {
-      nextChallenge.statusSummaryText = nextChallenge.challenged.firstName + ' ' + nextChallenge.winner.lastName + ' accepted challenge of: ' + nextChallenge.challenger.firstName + ' ' + nextChallenge.challenger.lastName;
+      nextChallenge.statusSummaryText = challengedName + ' accepted challenge of: ' + challengerName;
     } else if (inStatus == 'inviteDeclined') {
-      nextChallenge.statusSummaryText = nextChallenge.challenged.firstName + ' ' + nextChallenge.winner.lastName + ' declined challenge of: ' + nextChallenge.challenger.firstName + ' ' + nextChallenge.challenger.lastName;
+      nextChallenge.statusSummaryText = challengedName + ' declined challenge of: ' + challengerName;
     }
-
     updateChallenge(nextChallenge);
   }
 
@@ -75,6 +86,13 @@ export default function OpenChallenge({loggedInPlayer, nextChallenge, updateChal
     setCommentary(event.target.value);
   }
 
+  function getOpponentName() {
+    if (nextChallenge.challengerId == loggedInPlayer._id)
+      return challengedName;
+    else
+      return challengerName;
+  }
+
   return (
     <>
       {
@@ -84,16 +102,16 @@ export default function OpenChallenge({loggedInPlayer, nextChallenge, updateChal
         /* Invited (Player is the "challenger") */
         || (nextChallenge.status == 'invited' && nextChallenge.challengerId == loggedInPlayer._id) &&
             <div>
-              <p>Challenged {nextChallenge.challengedId}</p>
-              <p>on {nextChallenge.created}</p>
+              <p>Challenged {getOpponentName()}</p>
+              <p>on {lastUpdatedFormatted}</p>
               <p>Awaiting response...</p>
             </div>
 
         /* Invited (by a challenger) */
         || (nextChallenge.status == 'invited' && nextChallenge.challengerId != loggedInPlayer._id) &&
           <div>
-            <p>Challenged by {nextChallenge.challenger.firstName + nextChallenge.challenger.lastName}</p>
-            <p>on {nextChallenge.created}</p>
+            <p>Challenged by {getOpponentName()}</p>
+            <p>on {lastUpdatedFormatted}</p>
             <button className="accept" onClick={() => handleChallengeChange('inviteAccepted')}>Accept <Emoji symbol="🎾"/></button>
             <button className="decline" onClick={() => handleChallengeChange('inviteDeclined')}>Decline <Emoji symbol="⛔️"/></button>
           </div>
@@ -102,6 +120,7 @@ export default function OpenChallenge({loggedInPlayer, nextChallenge, updateChal
         || nextChallenge.status == 'inviteAccepted' &&
         <div className="resultFormContainer">
           <form className="form" onSubmit={handleResult}>
+            <p className="opponent">Vs {getOpponentName()}</p>
             <p className="formLabel">Did you win?</p>
             <input type="radio" id="yes" name="winner" value="yes" onChange={(event) => handleWinnerChange(event)} />
             <label htmlFor="yes">Yes</label>
