@@ -1,11 +1,87 @@
 .nextChallenge {
-  button {
+  padding: 8px 8px;
+  // box-shadow: 5px 5px 4px #888888;
+  box-shadow: 2px 2px 2px 2px #888888;
 
-    border: 1px solid #97CDD2;
+  .statusEmoji {
+    font-size: 3em;
+  }
+
+  .nextChallengePane {
+    min-height: 155px;
+    max-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    .noChallengePane {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .invitedChallengerView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .challengedText {
+      padding-top: 5px;
+    }
+    .responseText {
+      padding: 12px 0px;
+    }
+  }
+
+  .invitedChallengedView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .challengedDate {
+      padding-bottom: 15px;
+    }
+
+    .challengedButtons {
+      display: flex;
+      flex-direction: row;
+      .challengedButton {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  button {
+    border: 1px solid #27AEE3;
     border-radius: 3px;
     min-width: 70px;
     width: 80px;
-    background-color: #97CDD2
+    background-color:#27AEE3
+  }
+
+  .opponentEmoji {
+    padding-right: 5px;
+  }
+
+  .winnerInput {
+    display: flex;
+    padding-top: 8px;
+    padding-bottom: 8px;
+
+    .winnerLabel {
+      padding-right: 10px;
+    }
+  }
+
+  .scoreInput {
+    display: flex;
+    padding-top: 8px;
+    padding-bottom: 8px;
+
+    .scoreLabel {
+      padding-right: 10px;
+    }
   }
 
 }

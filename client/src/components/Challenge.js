@@ -2,10 +2,10 @@ import React from 'react'
 import moment from 'moment';
 
 export default function Challenge({challenge}) {
-  const longDate = moment(challenge.date).format("h:mm a - MMMM Do, YYYY");
-  const dayOfMonth = moment(challenge.date).format("Do");
-  const month = moment(challenge.date).format("MMM");
-
+  const longDate = moment(challenge.lastUpdated).format("h:mm a - MMMM Do, YYYY");
+  const dayOfMonth = moment(challenge.lastUpdated).format("Do");
+  const month = moment(challenge.lastUpdated).format("MMM");
+  const time = moment(challenge.lastUpdated).format("HH:mm");
   const getStatusIcon = () => {
     switch (challenge.status) {
       case 'invited':
@@ -15,7 +15,7 @@ export default function Challenge({challenge}) {
       case 'inviteDeclined':
         return '🚫';
       case 'complete':
-        return '🏁';
+        return '✅';
     }
   }
 
@@ -30,6 +30,8 @@ export default function Challenge({challenge}) {
         </div>
         <div className="statusSummaryText">
           {challenge.statusSummaryText}
+        </div>
+        <div className="commentaryText">
         </div>
       </div>
     </>

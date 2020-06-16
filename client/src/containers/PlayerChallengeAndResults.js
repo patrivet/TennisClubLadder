@@ -1,7 +1,7 @@
 import React from 'react';
 import OpenChallenge from './../components/OpenChallenge';
 
-export default function PlayerChallengeAndResults({loggedInPlayer, challenges, updateChallenge}) {
+export default function PlayerChallengeAndResults({players, loggedInPlayer, challenges, updateChallenge, updatePlayer}) {
 
   // Determine the player's open (if any) challenge - filter the
   function getNextChallenge () {
@@ -14,9 +14,9 @@ export default function PlayerChallengeAndResults({loggedInPlayer, challenges, u
       &&
       (c.status == 'invited' || c.status == 'inviteAccepted' || c.status == 'scheduled')
     );
-    console.log('INFO: pC&R.js: found =' + filtered.length + ' open Cs for player =' + loggedInPlayer.firstName);
+    // console.log('INFO: pC&R.js: found =' + filtered.length + ' open Cs for player =' + loggedInPlayer.firstName);
 
-    if (filtered.length> 1) console.log('WARNING: Player has more than one challenge is an open state. There should only be 0..1 per player.');
+    // if (filtered.length> 1) console.log('WARNING: Player has more than one challenge is an open state. There should only be 0..1 per player.');
     return filtered[filtered.length -1]; // return last - until there's only 1: [correction!] return first in array (array should only contain one anyway)
   }
 
@@ -26,10 +26,10 @@ export default function PlayerChallengeAndResults({loggedInPlayer, challenges, u
         <h3>My next game</h3>
       </div>
       <div className="nextChallenge">
-        <OpenChallenge loggedInPlayer={loggedInPlayer} nextChallenge={getNextChallenge()} updateChallenge={updateChallenge} />
+        <OpenChallenge players={players} loggedInPlayer={loggedInPlayer} nextChallenge={getNextChallenge()} updateChallenge={updateChallenge} updatePlayer={updatePlayer} />
       </div>
       <div className="myResultsLink">
-        <h3>My results</h3>
+        <h3></h3>
       </div>
     </>
   )

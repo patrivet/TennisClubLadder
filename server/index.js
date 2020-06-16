@@ -5,7 +5,6 @@ const PORT = 3001;
 const router = require('./router.js');
 const morgan = require('morgan')
 
-// Add morgan here
 server.use(morgan('combined'));
 server.use(cors());
 server.use(express.json());

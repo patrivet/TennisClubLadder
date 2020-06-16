@@ -82,6 +82,10 @@ var ChallengeSchema = new Schema({
     type: String,
     required: false
   },
+  winningScore: {
+    type: String,
+    required: false
+  },
 });
 const challengeModel = db.model("Challenge", ChallengeSchema);
 
@@ -99,6 +103,9 @@ const PlayerSchema = new Schema({
   email: {
     type: String, required: true
   },
+  password: {
+    type: String, required: false
+  },
   isAdmin: {
     type: Boolean, default: false
   },
@@ -113,7 +120,17 @@ const PlayerSchema = new Schema({
   numWins: { type: Number, required: false },
   // Note: can use shorthand->  numWins: Number,
   numLosses: { type: Number, required: false },
-  imagePath: { type: String, required: false }
+  imagePath: { type: String, required: false },
+  form: {
+    type: [String],
+    default: ['-', '-', '-'],
+    required: false
+  },
+  trend: {
+    type: Number,
+    default: 0,
+    required: false
+  },
 });
 const playerModel = db.model('Player', PlayerSchema);
 

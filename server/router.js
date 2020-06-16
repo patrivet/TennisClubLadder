@@ -15,4 +15,8 @@ router.get('/challenges', controller.getChallenges);
 router.post('/challenge', controller.postChallenge);
 router.put('/challenge', controller.putChallenge);
 
+// testing author
+router.get('/checkAuth', controller.checkAuth);
+// router.get('/login', controller.checkAuth);   LOGIN would be a GET or POST?
+
 module.exports = router;

@@ -1,15 +1,65 @@
-.ladderResults {
-  .title {
-    text-align: center;
-  }
 
-  .latestResults {
-    border-radius: 5px;
-    border: 1px solid black;
-    height: 200px;
-  }
+  .ladderResults {
+    .title {
+      text-align: center;
+    }
+    .ladderResultContainer {
+      // overflow: auto; // NOTE: this runs over the box shadow.
 
-  .resultsLink {
-    text-align: center;
+      .filterContainer {
+        display: flex;
+        align-items: center;
+        // justify-content: center;
+        flex-direction: row;
+
+        .iconUnselected {
+          color:grey;
+          filter: grayscale(100%)
+        }
+
+        .textBold {
+          font-weight: bold;
+        }
+
+        .filterLabel {
+          padding-right: 5px;
+        }
+        .filter-all {
+          padding: 5px 5px;
+          cursor: pointer;
+        }
+        .filter-mine {
+          padding: 5px 5px;
+          cursor: pointer;
+        }
+        .filter-invited {
+          padding: 5px 5px;
+          cursor: pointer;
+        }
+        .filter-inviteAccepted {
+          padding: 5px 5px;
+          cursor: pointer;
+        }
+        .filter-inviteDeclined {
+          padding: 5px 5px;
+          cursor: pointer;
+        }
+        .filter-complete {
+          padding: 5px 5px;
+          cursor: pointer;
+        }
+      }
+
+      .latestResults {
+        // box-shadow: 5px 5px 4px #888888;
+        box-shadow: 2px 2px 2px 2px #888888;
+        border-radius: 5px;
+        height: 200px;
+        padding: 10px 10px;
+      }
+
+      .resultsLink {
+        text-align: center;
+      }
   }
 }

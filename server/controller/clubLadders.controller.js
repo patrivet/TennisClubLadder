@@ -1,10 +1,38 @@
 const { ladderModel, playerModel, challengeModel } = require('./../model/clubLadders.model');
+const bcrypt = require('bcrypt');
+
+async function checkAuth (req, res) {
+  try {
+    // get the authorization header
+    const authHeader = req.get("Authorization"); // ??? req.headers.authorization;
+    // Abort if not found
+    if (!authHeader) {
+      res.status(401).send('Auth header missing - Not allowed');
+    }
+    // base64 decode and split the header
+    const [username, password] = Buffer.from(authHeader, 'base64').toString().split(':');
+    console.log("checkAuth -> username=" + username)
+    console.log("checkAuth -> password=" + password)
+
+    const foundUser = await playerModel.findOne({email: username});  //username = 'sapien.cursus@vitae.edu'
+    console.log("checkAuth -> foundUser =" + foundUser)
+
+    const passwordCheck = await bcrypt.compare(password, foundUser.password);
+    if (!passwordCheck) throw new Error();
+
+    if (foundUser.length) {
+      res.status(200).send('Auth passed - you\'re allowed');
+    } else {
+      res.status(401).send('Auth Failed - Not allowed');
+    }
+
+  } catch (error) {
+    console.log('ERROR: Error running /GET checkAuth =', error);
+    res.status(401).send('username or password incorrect');
+  }
+};
 
 async function getLadders (req, res) {
-  console.log('==========');
-  // console.log(req.query.acceptInvite);
-  console.log(req.params);
-  console.log(req.params);
   try {
     const ladders = await ladderModel.find({});
     res.status(201);
@@ -73,7 +101,6 @@ async function postChallenge (req, res) {
   try {
     // Body will contain the player Ids.
     const challenge = await challengeModel.create(req.body);
-    console.log(req.body);
     res.status(200);
     res.json(challenge);
   } catch (error) {
@@ -84,7 +111,7 @@ async function postChallenge (req, res) {
 }
 
 // Update (PUT) challenge- support any 1..n of the following fields being passed
-// - invitationStatus, resultStatus, winnerId etc
+// status, winnerId etc
 async function putChallenge (req, res) {
   try {
     const { _id } = req.body;
@@ -143,5 +170,6 @@ module.exports = {
   getPlayers,
   postPlayer,
   putChallenge,
-  putPlayer
+  putPlayer,
+  checkAuth // FIX ME remove checkAuth - testing Only
 }

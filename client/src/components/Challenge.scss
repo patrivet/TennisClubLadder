@@ -3,12 +3,30 @@
 
   .icon {
     padding-right: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
 
   .lastUpdated {
-    padding-right: 2px;
+    padding-right: 5px;
+    max-width: 100px;
+    min-width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
 
   .statusSummaryText {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .commentaryText {
+
   }
 }

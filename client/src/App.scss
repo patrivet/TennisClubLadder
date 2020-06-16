@@ -40,27 +40,35 @@ table {
   font-weight: 300;
 }
 
+.dataFetchingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 60vh;
+
+  .dataFetchingImage {
+    width: 200px;
+    height: 200px;
+  }
+}
+
 .ladderAndResultsContainer {
   display: flex;
 
   .ladder {
-    width: 65%;
-    background-color: blue
+    width: 60%;
   }
 
   .playerAndLadderResults {
-    width: 35%;
-    // border: 1px solid black;
-    background-color: pink;
+    width: 40%;
 
     .playerChallengeAndResults {
-      // height: 50%; /* 50 of the ladder - don't want this */
-      border: 1px solid black;
+      // border: 1px solid black;
     }
 
     .ladderResults {
-      // height: 50%;
-      border: 1px solid black;
+      // border: 1px solid black;
     }
   }
 }

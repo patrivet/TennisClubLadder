@@ -12,7 +12,6 @@ import React from 'react';
 // );
 // export default Emoji;
 
-
 const Emoji = ({label, symbol}) => (
   <span
       className="emoji"

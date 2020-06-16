@@ -2,9 +2,7 @@ import React from 'react';
 import LadderPlayer from './../components/LadderPlayer';
 import Emoji from './../components/Emoij.js';
 
-export default function Ladder({players, loggedInPlayer, createChallenge}) {
-  loggedInPlayer = { _id : "5ee24e886eabcbaaa70fbaea" }; // FIX ME - remove this
-
+export default function Ladder({players, loggedInPlayer, createChallenge, getPlayerActiveChallenges}) {
   return (
     /* Ladder Table with headers -------- -------- */
     <>
@@ -23,8 +21,10 @@ export default function Ladder({players, loggedInPlayer, createChallenge}) {
         </thead>
         <tbody>
           {players
+            .sort( (a, b) => (a.position > b.position) ? 1 : -1 )
             .map(player => {
-              return <LadderPlayer loggedInPlayer={loggedInPlayer} key={player._id} player={player} createChallenge={createChallenge} />
+              if (player == loggedInPlayer) return <LadderPlayer classFlag="currentPlayer" loggedInPlayer={loggedInPlayer} key={player._id} player={player} createChallenge={createChallenge} getPlayerActiveChallenges={getPlayerActiveChallenges} />
+              else return <LadderPlayer classFlag="noCurrentPlayer" loggedInPlayer={loggedInPlayer} key={player._id} player={player} createChallenge={createChallenge} getPlayerActiveChallenges={getPlayerActiveChallenges} />
           })}
         </tbody>
       </table>
