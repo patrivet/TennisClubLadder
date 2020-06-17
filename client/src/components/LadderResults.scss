@@ -4,10 +4,11 @@
       text-align: center;
     }
     .ladderResultContainer {
-      // overflow: auto; // NOTE: this runs over the box shadow.
+      //overflow: auto; // NOTE: this runs over the box shadow.
 
       .filterContainer {
         display: flex;
+
         align-items: center;
         // justify-content: center;
         flex-direction: row;
@@ -27,26 +28,32 @@
         .filter-all {
           padding: 5px 5px;
           cursor: pointer;
+          font-size: 1.1em;
         }
         .filter-mine {
           padding: 5px 5px;
           cursor: pointer;
+          font-size: 1.1em;
         }
         .filter-invited {
           padding: 5px 5px;
           cursor: pointer;
+          font-size: 1.3em;
         }
         .filter-inviteAccepted {
           padding: 5px 5px;
           cursor: pointer;
+          font-size: 1.3em;
         }
         .filter-inviteDeclined {
           padding: 5px 5px;
           cursor: pointer;
+          font-size: 1.3em;
         }
         .filter-complete {
           padding: 5px 5px;
           cursor: pointer;
+          font-size: 1.3em;
         }
       }
 
@@ -54,8 +61,9 @@
         // box-shadow: 5px 5px 4px #888888;
         box-shadow: 2px 2px 2px 2px #888888;
         border-radius: 5px;
-        height: 200px;
+        height: 47vh;
         padding: 10px 10px;
+        overflow: auto;
       }
 
       .resultsLink {

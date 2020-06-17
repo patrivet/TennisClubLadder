@@ -22,6 +22,9 @@ export default function LadderPlayer({classFlag, player, loggedInPlayer, createC
     if (loggedInPlayerPos == thisPlayerPos) {
       return false;
     }
+    else if (getPlayerActiveChallenges(player).length) {
+      return false;
+    }
     else if (thisPlayerPos > loggedInPlayerPos ) { // e.g. 4 > 1 :: 1st is challenging 4th - can challenge.
       return true;
     } else if (thisPlayerPos >= loggedInPlayerPos - 3) {
@@ -53,7 +56,7 @@ export default function LadderPlayer({classFlag, player, loggedInPlayer, createC
       <td>{player.form}</td>
       <td>{getTrendIcon()}</td>
       {(canChallengePlayer())
-        ? <td onClick={handleChallengeCreate}><Emoji symbol="🎾"/></td>
+        ? <td className="challengeImage" onClick={handleChallengeCreate}><Emoji symbol="🎾"/></td>
         : <td></td>
       }
     </tr>

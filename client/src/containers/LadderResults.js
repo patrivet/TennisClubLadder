@@ -61,7 +61,7 @@ export default function LadderResults({challenges, loggedInPlayer}) {
       <div className="latestResults">
         {getChallengesToShow()
         .sort( (a, b) =>  a.lastUpdated < b.lastUpdated ? 1 : -1 )
-        .slice(0, 7)
+
         .map(challenge => {
           return <Challenge key={challenge._id} challenge={challenge} />
         })}

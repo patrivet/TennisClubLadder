@@ -23,6 +23,8 @@ function App() {
   const [challenges, setChallenges] = useState([]);
   const [dataFetched, setDataFetched] = useState(false);
   let loggedInPlayer = {}; // FIX ME - replace with real session logged in.
+  let loggedInPlayerName = process.env.REACT_APP_PLAYER_NAME;
+  console.log("App -> loggedInPlayerName", loggedInPlayerName)
 
   useEffect( () => {
     // Get all DB data. FIX ME: move this to another component & make more DRY.
@@ -40,39 +42,6 @@ function App() {
       setChallenges(challenges);
       setDataFetched(true);
     }).catch( err => { console.log(`ERROR App.js:: useEffect() PromiseAll fetching data has error =`); console.log(err) } );
-    return;
-
-
-
-    // Get ladders
-    ApiService.getLadders()
-      .then(ladders => {
-        // only 1 ladder from ladders used for MVP, so pick 1st in return array
-        setLadder(ladders[0])
-      })
-      .catch( err => { console.log(`ERROR App.js:: useEffect() getPlayers Error =`); console.log(err) } );
-    // Get players
-    ApiService.getPlayers()
-    .then(players => {
-      setPlayers(players);
-    })
-
-    .catch( err => { console.log(`ERROR App.js:: useEffect() getChallenges Error =`); console.log(err) } );
-    // Get challenges
-    ApiService.getChallenges()
-      .then(challenges => {
-        challenges.forEach( c => {
-          c.lastUpdated = new Date(c.lastUpdated);
-          c.created = new Date(c.created);
-        });
-        setChallenges(challenges);
-        fixUpPlayerObjects()
-      })
-      .then( ()=> {
-        console.log('INFO: useEffect (1).....Cs challenges length =' + challenges.length + ' players length =' + players.length)
-      })
-      .catch( err => { console.log(`ERROR App.js:: useEffect() getChallenges Error =`); console.log(err) } );
-
   }, [])
 
   useEffect( () => {
@@ -181,6 +150,7 @@ function App() {
         // // USED TO  BULK SET DATA on PLAYERS
         // players.forEach( (p) => {
         //   p.trend = 0;
+        //   p.form = ['-', '-', '-'];
         //   ApiService.putPlayer(p);
         // })
 
@@ -216,7 +186,7 @@ function App() {
     // console.log(plyrs);
     // return plyrs.pop();
 
-    loggedInPlayer = players.find( (n) =>  n.firstName == 'Elton');
+    loggedInPlayer = players.find( (n) =>  n.firstName == 'Pat');
     return loggedInPlayer
   }
 

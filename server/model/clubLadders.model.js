@@ -25,6 +25,7 @@ var ChallengeSchema = new Schema({
   // Values move from: invited --> inviteAccepted / inviteDeclined / inviteExpired --> [ scheduled ]  --> complete --> challengeExpired.
     type: String,
     required: false,
+    //default: 'inviteAccepted',//'invited'
     default: 'invited'
   },
   // challenger is a player ID

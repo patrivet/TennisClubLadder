@@ -10,7 +10,7 @@ export default function Header() {
         <img alt="ATP Cup logo" src={logo} className="headerLogo"></img>
       </div>
       <div className="headerTitle">
-        Santa Monica TC Ladder
+        Wimbledon Village challenge Ladder
       </div>
         <div className="logoutContainer">
           <img alt="logout" src={logoutImage} className="logoutImage"></img>

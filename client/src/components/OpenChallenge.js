@@ -13,24 +13,6 @@ export default function OpenChallenge({players, loggedInPlayer, nextChallenge, u
 
   (loggedInPlayer) ? console.log('INFO: openChallenge.js ::: Logged in player =' + loggedInPlayer.firstName) : console.log('openChallenge.js ::: logged in player is NULL');
 
-  // if (nextChallenge) {
-  //   console.log('openChallenge.js :::Next Challenge =');
-  // }
-  // else {
-  //   console.log('openChallenge.js :::Next Challenge is NULL ??');
-  // }
-
-  //  TEMP TESTING IF OBJECTS ARE EQUAL - FIX ME: can be removed.
-  // if (nextChallenge) {
-  //   let c1 = nextChallenge;
-  //   let p1 = players[0];
-
-  //   console.log(`Challenge 1 has challenger =${c1.challenger.firstName}`);
-  //   console.log(`First player in players array =${p1.firstName}`);
-  //   console.log(`2 player objects are equal =`);
-  //   console.log(c1.challenger === p1);
-  // }
-
   const handleChallengeChange = (inStatus) => {
     // console.log("INFO: openChallenge.js::: running handleChallengeChange");
     // Set the new status on the challenge object and call function to write changes to DB and update this.state.
@@ -139,6 +121,7 @@ export default function OpenChallenge({players, loggedInPlayer, nextChallenge, u
   function handleScoreChange(event) {
     setScore(event.target.value);
   }
+
   function getOpponentName() {
     if (nextChallenge.challengerId == loggedInPlayer._id)
       return challengedName;
@@ -174,7 +157,7 @@ export default function OpenChallenge({players, loggedInPlayer, nextChallenge, u
             <p className="challengedDate">on {lastUpdatedFormatted}</p>
             <div className="challengedButtons">
               <button className="accept challengedButton" onClick={() => handleChallengeChange('inviteAccepted')}>Accept <Emoji symbol="🎾"/></button>
-              <button className="decline challengedButton" onClick={() => handleChallengeChange('inviteDeclined')}>Decline <Emoji symbol="⛔️"/></button>
+              <button className="decline challengedButton" onClick={() => handleChallengeChange('inviteDeclined')}>Decline <Emoji symbol="🚫"/></button>
             </div>
           </div>
 

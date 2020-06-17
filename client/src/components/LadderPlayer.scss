@@ -4,11 +4,14 @@
 }
 
 tr.currentPlayer {
-    outline: thin dotted #32a1ce;
-    // outline: thick double #32a1ce;
-
+    outline: thick dotted #32a1ce;
+    //outline: thick double #32a1ce;
     td {
       /* Overide the border bottom on this td */
-      border-bottom: 0px
+      border-bottom: 0px;
     }
+}
+
+.challengeImage {
+  cursor: pointer;
 }
