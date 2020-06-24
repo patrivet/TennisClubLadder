@@ -1,6 +1,6 @@
 # TennisClubLadder
 
-# Database setup:
+## Database setup:
 This project uses a mongo DB. Create a mongo DB with 3 collections:-
 challenges 
 ladders 
