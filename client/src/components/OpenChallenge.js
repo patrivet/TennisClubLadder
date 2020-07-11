@@ -8,13 +8,11 @@ export default function OpenChallenge({players, loggedInPlayer, nextChallenge, u
   const [score, setScore] = useState('');
   const challengerName = (nextChallenge) ? nextChallenge.challenger.firstName + ' ' + nextChallenge.challenger.lastName : null;
   const challengedName = (nextChallenge) ? nextChallenge.challenged.firstName + ' ' + nextChallenge.challenged.lastName : null;
-  // FIX ME - why is nextChallenge null?
   const lastUpdatedFormatted = (nextChallenge) ? moment(nextChallenge.lastUpdated).format("Do") + ' ' + moment(nextChallenge.lastUpdated).format("MMM") : null;
 
-  (loggedInPlayer) ? console.log('INFO: openChallenge.js ::: Logged in player =' + loggedInPlayer.firstName) : console.log('openChallenge.js ::: logged in player is NULL');
+  (loggedInPlayer) ? console.info('openChallenge.js ::: Logged in player =' + loggedInPlayer.firstName) : console.log('openChallenge.js ::: logged in player is NULL');
 
   const handleChallengeChange = (inStatus) => {
-    // console.log("INFO: openChallenge.js::: running handleChallengeChange");
     // Set the new status on the challenge object and call function to write changes to DB and update this.state.
     nextChallenge.status = inStatus;
 
@@ -38,6 +36,7 @@ export default function OpenChallenge({players, loggedInPlayer, nextChallenge, u
 
   function handleResult(event) {
     event.preventDefault();
+
     // set status
     nextChallenge.status = 'complete';
 

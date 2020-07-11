@@ -17,20 +17,18 @@ import './components/LadderResults.scss';
 import './components/OpenChallenge.scss';
 import './components/Challenge.scss';
 import tennisBallSpinning from './imgs/tennis-ball-spinning.gif'
+
 function App() {
   const [ladder, setLadder] = useState({});
   const [players, setPlayers] = useState([]);
   const [challenges, setChallenges] = useState([]);
   const [dataFetched, setDataFetched] = useState(false);
-  let loggedInPlayer = {}; // FIX ME - replace with real session logged in.
-  let loggedInPlayerName = process.env.REACT_APP_PLAYER_NAME;
-  console.log("App -> loggedInPlayerName", loggedInPlayerName)
+  const [lpPlayer, setLpPlayer] = useState({});
+
+  let loggedInPlayer = {};
 
   useEffect( () => {
-    // Get all DB data. FIX ME: move this to another component & make more DRY.
     console.log('INFO: app.js:: useEffect: fetching DB data..');
-
-    // TESTING promise all - June 16th:15:34
     Promise.all([ApiService.getLadders(), ApiService.getPlayers(), ApiService.getChallenges()]).then( (values) => {
       setLadder(values[0][0]);
       setPlayers(values[1]);
@@ -45,36 +43,31 @@ function App() {
   }, [])
 
   useEffect( () => {
-    // console.log('INFO: useEffect() (2).....Cs challenges length =' + challenges.length + ' players length =' + players.length);
     fixUpPlayerObjects();
   }, [challenges])
 
-
   // FIX ME- fixUpPlayerObjects() isn't need anymore? Check and remove: Jun 16: 12:19
   function fixUpPlayerObjects() {
-    // console.log('INFO: fixUpPlayerObjects ......Cs length =' + challenges.length + ' players length =' + players.length)
     for (let i = 0; i < challenges.length; i++) {
       const challenge = challenges[i];
       const pId = challenge.challengerId;
       if (pId) {
         // get the player object from players with _id matching challenger_id
         const p = getPlayerForId(pId);
-        if (!p) {console.log('WARNING: !! Challenge index =' + i + 'has no challengerId');}
+        if (!p) {console.log('WARNING: Challenge =' + i + 'has no challengerId');}
         else {
           challenge.challenger = null;
           challenge.challenger = p;
-          // console.log('INFO: Challenge challenger object set from players array.')
         }
       } else {
-        console.log('WARNING: !! Challenge index =' + i + 'has no challengerId');
+        console.log('WARNING: Challenge =' + i + 'has no challengerId');
       }
     }
   }
 
   // Update entire challenge Object
   function updateChallenge(challenge) {
-    // FIX ME - do this elsewhere- own Challenge component?
-    setFakeLoggedInPlayer();
+    setLoggedInPlayer();
 
     console.log("INFO: app.js::: running updateChallenge");
     // ======= (1) Update local objects ...
@@ -86,8 +79,6 @@ function App() {
 
     // ====== (2) DB update::: Update Challenge & player(s) object in DB
     ApiService.putChallenge(challenge);
-
-
     ApiService.putPlayer(getPlayerForId(challenge.challenger._id));
     ApiService.putPlayer(getPlayerForId(challenge.challenged._id));
 
@@ -103,7 +94,7 @@ function App() {
 
   function createChallenge(challengedPlayer) {
     // PARAMS: challengedPlayer ( player object )
-    setFakeLoggedInPlayer();
+    setLoggedInPlayer();
 
     // - create challenge object
     const challengeToCreate = {
@@ -113,18 +104,7 @@ function App() {
       challenged: challengedPlayer,
       playersIds: [loggedInPlayer._id, challengedPlayer._id],
       statusSummaryText : loggedInPlayer.firstName + ' ' + loggedInPlayer.lastName + ' challenged ' + challengedPlayer.firstName + ' ' + challengedPlayer.lastName,
-      // Created and lastUpdated are init in the backend.
     }
-
-    //  TEMP TESTING IF OBJECTS ARE EQUAL - FIX ME: can be removed.
-    // if (challengeToCreate) {
-    //   let c1 = challengeToCreate;
-    //   let p1 = players[0];
-    //   console.log(`(app.js) Challenge 1 has challenger =${c1.challenger.firstName}`);
-    //   console.log(`(app.js) First player in players array =${p1.firstName}`);
-    //   console.log(`(app.js) 2 player objects are equal =`);
-    //   console.log(c1.challenger === p1);
-    // }
 
     // - call POST challenge passing object
     ApiService.postChallenge(challengeToCreate)
@@ -146,20 +126,11 @@ function App() {
           return [...previousPlayers]
         });
 
-        // // TEMP FIX ME - can remove at the end
-        // // USED TO  BULK SET DATA on PLAYERS
-        // players.forEach( (p) => {
-        //   p.trend = 0;
-        //   p.form = ['-', '-', '-'];
-        //   ApiService.putPlayer(p);
-        // })
-
       })
       .catch( err => {
         console.log(`ERROR App.js:: createChallenge() Error =`); console.log(err)
       });
-
-    // FIX ME Send email to challengedId player using html template
+      // Send email to challengedId player using html template
   }
 
   function updatePlayer(id, updatedPlayer) {
@@ -177,15 +148,8 @@ function App() {
     console.log(players);
   }
 
-  function setFakeLoggedInPlayer () {
+  function setLoggedInPlayer () {
     // FIX ME - delete his function and all callers.
-
-    // store 2 players in array - pop & return
-    // plyrs = players.filter( p => p.firstName == 'Tyler' || p.firstName == 'Oren' )
-    // console.log(players.length);
-    // console.log(plyrs);
-    // return plyrs.pop();
-
     loggedInPlayer = players.find( (n) =>  n.firstName == 'Pat');
     return loggedInPlayer
   }
@@ -216,14 +180,14 @@ function App() {
           {/* ---------- MAIN CONTAINER -------------------- */}
           <div className="ladderAndResultsContainer">
             <div className="ladder">
-              <Ladder loggedInPlayer={setFakeLoggedInPlayer()} players={players} createChallenge={createChallenge} getPlayerActiveChallenges={getPlayerActiveChallenges}></Ladder>
+              <Ladder loggedInPlayer={setLoggedInPlayer()} players={players} createChallenge={createChallenge} getPlayerActiveChallenges={getPlayerActiveChallenges}></Ladder>
             </div>
             <div className="playerAndLadderResults">
               <div className="playerChallengeAndResults">
-                <PlayerChallengeAndResults players={players} loggedInPlayer={setFakeLoggedInPlayer()} challenges={challenges} updateChallenge={updateChallenge} updatePlayer={updatePlayer}></PlayerChallengeAndResults>
+                <PlayerChallengeAndResults players={players} loggedInPlayer={setLoggedInPlayer()} challenges={challenges} updateChallenge={updateChallenge} updatePlayer={updatePlayer}></PlayerChallengeAndResults>
               </div>
               <div className="ladderResults">
-                <LadderResults challenges={challenges} loggedInPlayer={setFakeLoggedInPlayer()}></LadderResults>
+                <LadderResults challenges={challenges} loggedInPlayer={setLoggedInPlayer()}></LadderResults>
               </div>
             </div>
           </div>
