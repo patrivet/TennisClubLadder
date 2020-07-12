@@ -171,5 +171,5 @@ module.exports = {
   postPlayer,
   putChallenge,
   putPlayer,
-  checkAuth // FIX ME remove checkAuth - testing Only
+  checkAuth
 }

@@ -23,8 +23,6 @@ function App() {
   const [players, setPlayers] = useState([]);
   const [challenges, setChallenges] = useState([]);
   const [dataFetched, setDataFetched] = useState(false);
-  const [lpPlayer, setLpPlayer] = useState({});
-
   let loggedInPlayer = {};
 
   useEffect( () => {
@@ -46,7 +44,6 @@ function App() {
     fixUpPlayerObjects();
   }, [challenges])
 
-  // FIX ME- fixUpPlayerObjects() isn't need anymore? Check and remove: Jun 16: 12:19
   function fixUpPlayerObjects() {
     for (let i = 0; i < challenges.length; i++) {
       const challenge = challenges[i];
@@ -144,13 +141,10 @@ function App() {
     setPlayers( (previousPlayers) => {
       return [...previousPlayers]
     });
-    console.log('INFO: app.js(update player) players array =' );
-    console.log(players);
   }
 
   function setLoggedInPlayer () {
-    // FIX ME - delete his function and all callers.
-    loggedInPlayer = players.find( (n) =>  n.firstName == 'Pat');
+    loggedInPlayer = players.find( (n) =>  n.firstName == 'Oren');
     return loggedInPlayer
   }
 

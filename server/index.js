@@ -1,7 +1,9 @@
+
+const config = require('./config');
 const express = require('express');
 const server = express();
 const cors = require('cors');
-const PORT = 3001;
+const PORT = config.PORT;
 const router = require('./router.js');
 const morgan = require('morgan')
 

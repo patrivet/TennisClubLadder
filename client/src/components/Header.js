@@ -15,11 +15,6 @@ export default function Header() {
         <div className="logoutContainer">
           <img alt="logout" src={logoutImage} className="logoutImage"></img>
         </div>
-        {/* <div className="settingsContainer">
-          <img alt="settings" src={settingsImage} className="settingsImage"></img>
-        {/* </div> */}
-
-
     </div>
   )
 }
