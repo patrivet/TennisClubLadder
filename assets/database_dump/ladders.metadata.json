@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"tennisClubLadders.ladders"}],"uuid":"6481079b43b54d589498993db3963ce5"}

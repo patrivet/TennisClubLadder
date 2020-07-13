@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "5ee2463bef43aac8fb3c61ef"
+  },
+  "settings": {
+    "maxSets": 3,
+    "finalSetTiebreak": true
+  },
+  "playerIds": [],
+  "name": "Santa Monica TC Challenge Ladder",
+  "players": [],
+  "__v": 0
+}]
