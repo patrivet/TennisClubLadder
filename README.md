@@ -1,5 +1,3 @@
-
-
 # TennisClubLadder	
 Tennis Club Ladder is web application which allows a tennis club to setup and run an internal singles challenge ladder.
 Players can see who is available to play, send and accept challenges to play, record results and see a filtered list of ladder updates.
@@ -19,8 +17,13 @@ Players can see who is available to play, send and accept challenges to play, re
 	 - HOST=   your server's hostname.
 	
 ### Database setup:
-To use TennisClubLadder, an initial database dummy data load is required. Use the database_dump directory */assets/database_dump* as directed below:
+To use TennisClubLadder, an initial import of dummy data is required. 
+Run the following command, replacing *<database_dump directory>* 
+with the directory /data/DB_files/
+
 ```mongorestore -d <database_name> <database_dump_directory>```
+
+e.g. ```mongorestore -d tennis_ladder_db /data/DB_files/```
 
 ## Tech stack:
 
