@@ -92,7 +92,7 @@ const challengeModel = db.model("Challenge", ChallengeSchema);
 // Player Model ==========================
 const PlayerSchema = new Schema({
   id: {
-    type: String, required: true
+    type: String, required: false
   },
   firstName: {
     type: String, required: true
@@ -104,7 +104,7 @@ const PlayerSchema = new Schema({
     type: String, required: true
   },
   password: {
-    type: String, required: false
+    type: String, required: true
   },
   isAdmin: {
     type: Boolean, default: false

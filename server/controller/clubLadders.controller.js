@@ -72,13 +72,21 @@ async function getPlayers (_, res) {
 
 async function postPlayer (req, res) {
   try {
-    const { firstName, lastName, email } = req.body;
-    if (!firstName || !lastName || !email) {
+    const { firstName, lastName, email, password } = req.body;
+    if (!firstName || !lastName || !email || !password) {
       throw new Error('one or more parameters for POST /player were missing');
     }
-    const player = await playerModel.create(req.body);
-    res.status(200);
-    res.json(player);
+    // If a Player with this email already exists - return here - else continue
+    if (await playerModel.findOne({email : email})) {
+      return res.status(409).json({error: 'This User already exists.'});
+    }
+
+    // Encrypt password.
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    const player = await playerModel.create({...req.body, password : passwordHash});
+    // Don't return the player object here.
+    res.sendStatus(200);
   } catch (error) {
     console.log('ERROR: running /POST player =', error);
     res.status(400);
