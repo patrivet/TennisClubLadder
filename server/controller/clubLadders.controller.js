@@ -1,5 +1,6 @@
 const { ladderModel, playerModel, challengeModel } = require('./../model/clubLadders.model');
 const bcrypt = require('bcrypt');
+const { hashValue } = require('./../utils');
 
 async function checkAuth (req, res) {
   try {
@@ -82,7 +83,7 @@ async function postPlayer (req, res) {
     }
 
     // Encrypt password.
-    const passwordHash = await bcrypt.hash(password, 10);
+    const passwordHash = await hashValue(password);
 
     const player = await playerModel.create({...req.body, password : passwordHash});
     // Don't return the player object here.
@@ -91,6 +92,35 @@ async function postPlayer (req, res) {
     console.log('ERROR: running /POST player =', error);
     res.status(400);
     res.json({serverError: `ERROR: Express Server:: ${error}`});
+  }
+}
+
+async function putPlayer (req, res) {
+  try {
+    const _id = req.params.id;
+    const { password } = req.body;
+    let updatedPlayer = req.body;
+
+    // Encrypt password is body contains one.
+    if (req.body.password.length) {
+      updatedPlayer = {...req.body, password: await hashValue(password)}
+    }
+
+    let player = await playerModel.findOneAndUpdate({_id}, updatedPlayer, {
+      new: true
+    });
+
+    if (!player) {
+      //   No player found
+      throw new Error(`no player was found with id=${_id}`);
+    }
+
+    res.status(200);
+    res.json(player);
+  } catch (error) {
+    console.log('ERROR: Error running PUT /player =', error);
+    res.status(400);
+    res.json({serverError: `ERROR::: ${error}`});
   }
 }
 
@@ -145,30 +175,6 @@ async function putChallenge (req, res) {
   }
 }
 
-async function putPlayer (req, res) {
-  try {
-    const { _id } = req.body;
-    if (!_id) {
-      throw new Error('no player id was provided in PUT call.');
-    }
-
-    let player = await playerModel.findOneAndUpdate({_id}, req.body, {
-      new: true
-    });
-
-    if (!player) {
-      //   No player found
-      throw new Error(`no player was found with id=${_id}`);
-    }
-
-    res.status(200);
-    res.json(player);
-  } catch (error) {
-    console.log('ERROR: Error running PUT /player =', error);
-    res.status(400);
-    res.json({serverError: `ERROR::: ${error}`});
-  }
-}
 
 module.exports = {
   getLadders,

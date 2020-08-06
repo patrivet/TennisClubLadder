@@ -8,7 +8,7 @@ router.post('/ladder', controller.postLadder);
 // Players and Challenges
 router.get('/players', controller.getPlayers);
 router.post('/player', controller.postPlayer);
-router.put('/player', controller.putPlayer);
+router.put('/player/:id', controller.putPlayer);
 
 router.get('/challenges', controller.getChallenges);
 router.post('/challenge', controller.postChallenge);
