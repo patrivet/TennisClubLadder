@@ -1,6 +1,32 @@
 const { ladderModel, playerModel, challengeModel } = require('./../model/clubLadders.model');
-const bcrypt = require('bcrypt');
+const config = require('./../config');
 const { hashValue } = require('./../utils');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const SECRET_KEY = config.SECRET_KEY;
+
+async function login (req, res) {
+  const { email, password } = req.body;
+  let loginError = 'Username or password is incorrect';
+  try {
+    const user = await playerModel.findOne({email: email});
+
+    // Compare password to encrypted value in DB
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) throw new Error();
+
+    // Generate token and return it.
+    if (!SECRET_KEY.length) {
+      loginError = 'Secret key is missing in .env file.';
+      throw new Error()
+    };
+    const token = jwt.sign( {_id: user._id }, SECRET_KEY);
+    res.status(200).json({ token });
+
+  } catch (error) {
+    res.status(401).json({ error: '401', message: loginError });
+  }
+}
 
 async function checkAuth (req, res) {
   try {
@@ -98,10 +124,9 @@ async function postPlayer (req, res) {
 async function putPlayer (req, res) {
   try {
     const _id = req.params.id;
-    const { password } = req.body;
     let updatedPlayer = req.body;
 
-    // Encrypt password is body contains one.
+    // Encrypt password if body contains one.
     if (req.body.password.length) {
       updatedPlayer = {...req.body, password: await hashValue(password)}
     }
@@ -185,5 +210,6 @@ module.exports = {
   postPlayer,
   putChallenge,
   putPlayer,
-  checkAuth
+  login,
+  checkAuth,
 }
