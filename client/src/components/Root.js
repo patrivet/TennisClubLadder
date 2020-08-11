@@ -1,18 +1,11 @@
-import React, { useState } from 'react'
-import { Switch, Route, Link, Redirect } from 'react-router-dom';
-import App from './../App';
-import Login from './Login'
+import React from 'react'
+import { BrowserRouter } from 'react-router-dom';
+import Dashboard from '../containers/Dashboard';
 
 export default function Root() {
   return (
-      <>
-        <Switch>
-          {/* <Route component={Login} path="/login" />
-          <Route component={App} path="/ladder" />
-          <Route component={Login} path="/" /> */}
-          <Route component={Login} path="/login" />
-          <Route component={App} path="/" />
-        </Switch>
-      </>
+    <BrowserRouter>
+      <Dashboard />
+    </BrowserRouter>
   )
 }
