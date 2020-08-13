@@ -1,109 +1,58 @@
 // Express local server.
-const baseUrl = 'http://localhost:3001';
+const BASE_URL = process.env.REACT_APP_BASE_URL ||'http://localhost:3001';
+
+const fetchRequest = (url, options = {}) => {
+  return fetch(`${BASE_URL}/${url}`, options)
+    .then(res => res.status < 400 ? res : Promise.reject(res))
+    .then(res => res.json())
+    .catch(error => {
+      console.log(`${error.message} while fetching /${url}`);
+    })
+}
+
+// Generate a headers object. Assumes using JSON for response and request.
+const genHeaders = (restMethod, payload) => {
+  const headers = {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: `${restMethod}`,
+    body: JSON.stringify(payload)
+  };
+  return headers
+}
 
 export default {
   // GET ladders
   getLadders() {
-    return fetch(`${baseUrl}/ladders`)
-      .then(res => res.status <= 400 ? res : Promise.reject(res))
-      .then(res => res.json())
-      .catch((error) => {
-        console.error(`ERROR: apiService : getLadder() ${error} performing GET to URL:${baseUrl}`);
-      });
+    return fetchRequest('ladders')
   },
 
   // GET players
   getPlayers() {
-    return fetch(`${baseUrl}/players`)
-      .then(res => res.status <= 400 ? res : Promise.reject(res))
-      .then(res => res.json())
-      .catch((error) => {
-        console.error(`ERROR: apiService : getPlayers() ${error} performing GET to URL:${baseUrl}`);
-      });
+    return fetchRequest('players')
   },
 
   // GET challenges
   getChallenges() {
-    return fetch(`${baseUrl}/challenges`)
-      .then(res => res.status <= 400 ? res : Promise.reject(res))
-      .then(res => res.json())
-      .catch((error) => {
-        console.error(`ERROR: apiService : getChallenges() ${error} performing GET to URL:${baseUrl}`);
-      });
+    return fetchRequest('challenges')
   },
 
   // POST challenge : to be used to update any change to challenge:-
-  // Status change for an Accept or Decline, or a result submission.
   postChallenge(newChallenge) {
-    const headers = {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify(newChallenge)
-    }
-    return fetch(`${baseUrl}/challenge`, headers)
-      .then(res => res.status < 400 ? res : Promise.reject(res))
-      .then(res => res.json())
-      .catch((error) => {
-        console.log(`ERROR: apiService(): postChallenge() performing POST to URL:${baseUrl}`);
-        console.error(error)
-      });
+    return fetchRequest('challenge', genHeaders('POST', newChallenge))
   },
 
   postPlayer(newPlayer) {
-    const headers = {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify(newPlayer)
-    }
-    return fetch(`${baseUrl}/player`, headers)
-      .then(res => res.status < 400 ? res : Promise.reject(res))
-      .then(res => res.json())
-      .catch((error) => {
-        console.log(`ERROR: apiService(): postPlayer() performing POST to URL:${baseUrl}`);
-        console.error(error)
-      });
+    return fetchRequest('player', genHeaders('POST', newPlayer))
   },
 
   putPlayer(updatedPlayer) {
-    const headers = {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: "PUT",
-      body: JSON.stringify(updatedPlayer)
-    }
-    return fetch(`${baseUrl}/player`, headers)
-      .then(res => res.status < 400 ? res : Promise.reject(res))
-      .then(res => res.json())
-      .catch((error) => {
-        console.log(`ERROR: apiService(): putPlayer() performing POST to URL:${baseUrl}`);
-        console.error(error)
-      });
+    return fetchRequest('player', genHeaders('PUT', updatedPlayer))
   },
 
   putChallenge(updatedChallenge) {
-    const headers = {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: "PUT",
-      body: JSON.stringify(updatedChallenge)
-    }
-    return fetch(`${baseUrl}/challenge`, headers)
-      .then(res => res.status < 400 ? res : Promise.reject(res))
-      .then(res => res.json())
-      .catch((error) => {
-        console.log(`ERROR: apiService(): putChallenge() performing POST to URL:${baseUrl}`);
-        console.error(error)
-      });
+    return fetchRequest('challenge', genHeaders('PUT', updatedChallenge))
   }
-
 }
