@@ -49,7 +49,7 @@ export default {
   },
 
   putPlayer(updatedPlayer) {
-    return fetchRequest('player', genHeaders('PUT', updatedPlayer))
+    return fetchRequest(`player/${updatedPlayer._id}`, genHeaders('PUT', updatedPlayer))
   },
 
   putChallenge(updatedChallenge) {

@@ -127,7 +127,7 @@ async function putPlayer (req, res) {
     let updatedPlayer = req.body;
 
     // Encrypt password if body contains one.
-    if (req.body.password.length) {
+    if (req.body.password) {
       updatedPlayer = {...req.body, password: await hashValue(password)}
     }
 
