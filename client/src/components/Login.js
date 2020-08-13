@@ -1,31 +1,47 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import {HasAuthContext} from '../containers/Dashboard';
 
-export default function Login() {
-  // NOT IN USE
-  // const [ email, setEmail ] = useState('');
-  // onChange = (e) => {
-  // }
-  // onSubmit = async () => {
-  // }
+export default function Login(props) {
+  const setIsAuth = useContext(HasAuthContext);
+  const [ state, setState ] = useState({ email: '', password : ''});
+
+  function handleFormChange(e) {
+    const { name, value } = e.target;
+    setState( prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  }
+
+  function handleFormSubmit (e) {
+    e.preventDefault();
+    // Authentication check TODO here
+
+    // Update the URL to /home using history
+    props.history.push('/home');
+    // set Auth to true.
+    setIsAuth(true);
+  }
+
   return (
     <div className="loginContainer">
-          {/* <Form>
-            <Input
-              name='email'
-              placeholder='Email'
-              onChange={e => this.onChange(e)}
-              value={this.state.email} />
-            <Input
-              name='password'
-              placeholder='password'
-              type='password'
-              onChange={e => this.onChange(e)}
-              value={this.state.password} />
-            <br />
-            <Button onClick={() => this.onSubmit()}>Login</Button>
-          </Form> */}
+      <form onSubmit={handleFormSubmit}>
+        <input
+          name='email'
+          placeholder='Email'
+          onChange={handleFormChange}
+          required
+        />
+        <input
+          name='password'
+          placeholder='password'
+          type='password'
+          onChange={handleFormChange}
+          required
+        />
+        <br />
+        <button type="submit">Login</button>
+      </form>
     </div>
   );
 }
-
-
