@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react'
-import {HasAuthContext} from '../containers/Dashboard';
+import ApiService from './ApiService';
 
 export default function Login(props) {
-  const setIsAuth = useContext(HasAuthContext);
   const [ state, setState ] = useState({ email: '', password : ''});
+  const [ failedAuth, setFailedAuth ] = useState(null);
 
   function handleFormChange(e) {
     const { name, value } = e.target;
@@ -13,14 +13,23 @@ export default function Login(props) {
     }));
   }
 
-  function handleFormSubmit (e) {
+  async function handleFormSubmit (e) {
     e.preventDefault();
-    // Authentication check TODO here
+    // Authentication check
+    const { email, password } = state;
+    const user = { email, password };
+    const isAuthenticated = await ApiService.JWTLogin(state.email, state.password);
 
-    // Update the URL to /home using history
-    props.history.push('/home');
-    // set Auth to true.
-    setIsAuth(true);
+    if (!isAuthenticated) {
+      setFailedAuth(true);
+    } else {
+      // Update the URL to /home using history
+      props.history.push('/home');
+      // set Auth state to true.
+      props.setIsAuth(true);
+      // Set local storage auth to true
+      localStorage.setItem("auth", "true");
+    }
   }
 
   return (
@@ -28,7 +37,7 @@ export default function Login(props) {
       <form onSubmit={handleFormSubmit}>
         <input
           name='email'
-          placeholder='Email'
+          placeholder='email'
           onChange={handleFormChange}
           required
         />
@@ -40,6 +49,7 @@ export default function Login(props) {
           required
         />
         <br />
+        { failedAuth && <p>Wrong Username or Password</p>}
         <button type="submit">Login</button>
       </form>
     </div>

@@ -10,6 +10,10 @@ async function login (req, res) {
   let loginError = 'Username or password is incorrect';
   try {
     const user = await playerModel.findOne({email: email});
+    if (!user) {
+      loginError = 'No user found with email= ' + email;
+      throw new Error()
+    };
 
     // Compare password to encrypted value in DB
     const validPassword = await bcrypt.compare(password, user.password);
@@ -24,40 +28,9 @@ async function login (req, res) {
     res.status(200).json({ token });
 
   } catch (error) {
-    res.status(401).json({ error: '401', message: loginError });
+    res.status(401).send({ error: '401', message: loginError });
   }
 }
-
-async function checkAuth (req, res) {
-  try {
-    // get the authorization header
-    const authHeader = req.get("Authorization"); // ??? req.headers.authorization;
-    // Abort if not found
-    if (!authHeader) {
-      res.status(401).send('Auth header missing - Not allowed');
-    }
-    // base64 decode and split the header
-    const [username, password] = Buffer.from(authHeader, 'base64').toString().split(':');
-    console.log("checkAuth -> username=" + username)
-    console.log("checkAuth -> password=" + password)
-
-    const foundUser = await playerModel.findOne({email: username});  //username = 'sapien.cursus@vitae.edu'
-    console.log("checkAuth -> foundUser =" + foundUser)
-
-    const passwordCheck = await bcrypt.compare(password, foundUser.password);
-    if (!passwordCheck) throw new Error();
-
-    if (foundUser.length) {
-      res.status(200).send('Auth passed - you\'re allowed');
-    } else {
-      res.status(401).send('Auth Failed - Not allowed');
-    }
-
-  } catch (error) {
-    console.log('ERROR: Error running /GET checkAuth =', error);
-    res.status(401).send('username or password incorrect');
-  }
-};
 
 async function getLadders (req, res) {
   try {
@@ -211,5 +184,4 @@ module.exports = {
   putChallenge,
   putPlayer,
   login,
-  checkAuth,
 }

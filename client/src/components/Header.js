@@ -1,9 +1,16 @@
 import React from 'react'
 import logo from '../imgs/1200px-ATP_Cup_logo.svg.png'
 import logoutImage from '../exit-64.png'
-import settingsImage from '../imgs/settings-48.png'
+import './Header.scss';
 
-export default function Header() {
+export default function Header(props) {
+  const handleLogout = () => {
+    // Remove auth from local storage, reset state and change URL.
+    localStorage.removeItem("auth")
+    props.setIsAuth(false);
+    props.history.push('/');
+  }
+
   return (
     <div className="headerContainer">
       <div className="headerLogoContainer">
@@ -13,7 +20,7 @@ export default function Header() {
         Club Challenge Ladder
       </div>
         <div className="logoutContainer">
-          <img alt="logout" src={logoutImage} className="logoutImage"></img>
+          <img alt="logout" src={logoutImage} className="logoutImage" onClick={() => handleLogout()}></img>
         </div>
     </div>
   )

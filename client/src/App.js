@@ -3,13 +3,11 @@ import './App.scss';
 import ApiService from './components/ApiService';
 
 /* IMPORT: other functions */
-import Header from './components/Header';
 import Ladder from './containers/Ladder';
 import PlayerChallengeAndResults from './containers/PlayerChallengeAndResults';
 import LadderResults from './containers/LadderResults';
 import QuoteRandomiser from './components/QuoteRandomiser';
 
-import './components/Header.scss';
 import './components/LadderPlayer.scss';
 import './components/Ladder.scss';
 import './components/PlayerChallengeAndResults.scss';
@@ -163,7 +161,6 @@ function App() {
 
   return (
     <>
-      <Header />
       <QuoteRandomiser />
       { (!dataFetched)
         ? <div className="dataFetchingContainer">

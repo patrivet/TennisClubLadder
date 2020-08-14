@@ -16,6 +16,5 @@ router.put('/challenge', controller.putChallenge);
 
 // Auth
 router.post('/login', controller.login);
-router.get('/checkAuth', controller.checkAuth);
 
 module.exports = router;

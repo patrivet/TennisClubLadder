@@ -1,12 +1,12 @@
 // Express local server.
-const BASE_URL = process.env.REACT_APP_BASE_URL ||'http://localhost:3001';
+const BASE_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001';
 
 const fetchRequest = (url, options = {}) => {
   return fetch(`${BASE_URL}/${url}`, options)
     .then(res => res.status < 400 ? res : Promise.reject(res))
     .then(res => res.json())
     .catch(error => {
-      console.log(`${error.message} while fetching /${url}`);
+      console.log(`${error} while fetching /${url}`);
     })
 }
 
@@ -54,5 +54,9 @@ export default {
 
   putChallenge(updatedChallenge) {
     return fetchRequest('challenge', genHeaders('PUT', updatedChallenge))
+  },
+
+  JWTLogin (email, password) {
+    return fetchRequest('login', genHeaders('POST', {email, password}))
   }
 }
