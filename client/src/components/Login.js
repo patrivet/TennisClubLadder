@@ -5,30 +5,36 @@ export default function Login(props) {
   const [ state, setState ] = useState({ email: '', password : ''});
   const [ failedAuth, setFailedAuth ] = useState(null);
 
-  function handleFormChange(e) {
-    const { name, value } = e.target;
+  function handleFormChange(event) {
+    const { name, value } = event.target;
     setState( prevState => ({
       ...prevState,
       [name]: value
     }));
   }
 
-  async function handleFormSubmit (e) {
+  async function handleFormSubmit (event) {
     e.preventDefault();
     // Authentication check
     const { email, password } = state;
-    const user = { email, password };
-    const isAuthenticated = await ApiService.JWTLogin(state.email, state.password);
+    const res = await ApiService.JWTLogin(state.email, state.password);
 
-    if (!isAuthenticated) {
+    if (!res) {
       setFailedAuth(true);
     } else {
       // Update the URL to /home using history
       props.history.push('/home');
       // set Auth state to true.
       props.setIsAuth(true);
-      // Set local storage auth to true
+
+      // Local storage
+      // auth flag
       localStorage.setItem("auth", "true");
+      // JWT token
+      const { token } = res;
+      localStorage.setItem("accessToken", token);
+      // Logged in user email
+      localStorage.setItem('sessionEmail', email);
     }
   }
 

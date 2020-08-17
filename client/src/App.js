@@ -142,7 +142,9 @@ function App() {
   }
 
   function setLoggedInPlayer () {
-    loggedInPlayer = players.find( (n) =>  n.firstName == 'Oren');
+    // Local storage holds the authenticated session sessionEmail
+    const sessionEmail = localStorage.getItem('sessionEmail');
+    loggedInPlayer = players.find( (player) =>  player.email == sessionEmail);
     return loggedInPlayer
   }
 

@@ -6,7 +6,9 @@ import './Header.scss';
 export default function Header(props) {
   const handleLogout = () => {
     // Remove auth from local storage, reset state and change URL.
-    localStorage.removeItem("auth")
+    localStorage.removeItem('auth');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('sessionEmail');
     props.setIsAuth(false);
     props.history.push('/');
   }
