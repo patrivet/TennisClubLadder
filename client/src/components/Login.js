@@ -14,7 +14,7 @@ export default function Login(props) {
   }
 
   async function handleFormSubmit (event) {
-    e.preventDefault();
+    event.preventDefault();
     // Authentication check
     const { email, password } = state;
     const res = await ApiService.JWTLogin(state.email, state.password);
