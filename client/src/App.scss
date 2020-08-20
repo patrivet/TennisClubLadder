@@ -1,3 +1,5 @@
+@import './_variables';
+
 /* Reset CSS */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -26,6 +28,7 @@ body {
   margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
+  background-color: $tertiaryColor;
 }
 
 table {
@@ -73,9 +76,6 @@ table {
     }
   }
 }
-
-
-
 
 /* PRE-PACKAGED CSS WITH REACT APP */
 /* .App {

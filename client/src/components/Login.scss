@@ -1,0 +1,75 @@
+@import '../variables';
+
+.login {
+  .login__titleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin-right: 15px;
+    .login__tennisEmoij {
+      font-size: 2.5em;
+    }
+
+    .login__title {
+      margin-bottom: 15px;
+      color: $primaryColor;
+    }
+  }
+
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+  background-color: $tertiaryColor;
+
+  .login__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  input {
+    display: flex;
+    padding-left: 6px;
+  }
+
+  button:focus, input:focus {
+    outline-color: $primaryColor;
+    outline: none;
+  }
+
+  button {
+    color: white;
+    background-color: $primaryColor;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  button:focus, button:hover {
+    background-color: $secondaryColor;
+    border-color: $secondaryColor;
+  }
+
+  input, button {
+    font-family: 'Archivo', sans-serif;
+    font-size: 16px;
+    width: 230px;
+    border-radius: 7px;
+    border: 1px solid $primaryColor;
+    margin-bottom: 6px;
+  }
+
+  .login__failed {
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-style: italic;
+    color: red;
+  }
+
+  .login__registerText {
+    font-size: 0.9em;
+  }
+}

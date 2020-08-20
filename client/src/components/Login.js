@@ -1,5 +1,8 @@
 import React, { useState, useContext } from 'react'
 import ApiService from './ApiService';
+import './Login.scss';
+import { Link } from 'react-router-dom';
+import Emoji from './Emoij';
 
 export default function Login(props) {
   const [ state, setState ] = useState({ email: '', password : ''});
@@ -39,24 +42,29 @@ export default function Login(props) {
   }
 
   return (
-    <div className="loginContainer">
-      <form onSubmit={handleFormSubmit}>
+    <div className="login">
+      <div className="login__titleContainer">
+        <div className="login__tennisEmoij"><Emoji symbol="🎾"/></div>
+        <h2 className="login__title">Club Ladder</h2>
+      </div>
+      <form className="login__form" onSubmit={handleFormSubmit}>
         <input
           name='email'
-          placeholder='email'
+          type='text'
+          placeholder='Enter your email address'
           onChange={handleFormChange}
           required
         />
         <input
           name='password'
-          placeholder='password'
+          placeholder='Enter your password'
           type='password'
           onChange={handleFormChange}
           required
         />
-        <br />
-        { failedAuth && <p>Wrong Username or Password</p>}
-        <button type="submit">Login</button>
+        { failedAuth && <p className="login__failed">Wrong Username or Password</p>}
+        <button type="submit">LOG IN</button>
+        <p className="login__registerText">Not registered? <Link to={'/register'}>Register here</Link></p>
       </form>
     </div>
   );

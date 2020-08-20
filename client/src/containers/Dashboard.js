@@ -4,6 +4,7 @@ import App from './../App';
 import PlayerDetail from './../components/PlayerDetail';
 import Login from '../components/Login';
 import Header from './../components/Header';
+import Register from './../components/Register';
 
 export default function Dashboard (props) {
   const [isAuth, setIsAuth] = useState(() => localStorage.getItem("auth"));
@@ -19,6 +20,8 @@ export default function Dashboard (props) {
           )}/>
         }
         { isAuth && <Route path='/player/:id' component={PlayerDetail} />}
+
+        <Route path='/register' component={Register}/>
 
         {!isAuth &&
           <Route path='/' render={ (props) => (
