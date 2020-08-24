@@ -101,6 +101,7 @@ async function putPlayer (req, res) {
 
     // Encrypt password if body contains one.
     if (req.body.password) {
+      const password = req.body.password;
       updatedPlayer = {...req.body, password: await hashValue(password)}
     }
 
