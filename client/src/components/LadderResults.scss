@@ -8,9 +8,7 @@
 
       .filterContainer {
         display: flex;
-
         align-items: center;
-        // justify-content: center;
         flex-direction: row;
 
         .iconUnselected {
@@ -54,6 +52,51 @@
           padding: 5px 5px;
           cursor: pointer;
           font-size: 1.3em;
+        }
+
+        // Tool-tip for Challenge status toggle emoji icons.
+        p[tooltiptext] {
+          position: relative;
+          display: inline-block;
+          z-index: 5;
+        }
+
+        p[tooltiptext]::after {
+          content: attr(tooltiptext);
+          visibility: hidden;
+          width: auto;
+          background-color: #555;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px 15px;
+          position: absolute;
+          z-index: 1;
+          top: 90%;
+          left: -90%;
+          opacity: 0;
+          transition: opacity 0.4s;
+          font-size: 0.7em;
+        }
+
+        // Add an element for an Arrow effect "before" the tooltiptext element
+        p[tooltiptext]::before {
+          visibility: hidden;
+          opacity: 0;
+          transition: opacity 0.4s;
+          content: "";
+          position: absolute;
+          left: 50%;
+          top: 65%;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: transparent transparent #555 transparent;
+        }
+
+        p[tooltiptext]:hover::after, p[tooltiptext]:hover::before {
+          visibility: visible;
+          opacity: 1;
         }
       }
 

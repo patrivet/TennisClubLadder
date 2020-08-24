@@ -53,10 +53,10 @@ export default function LadderResults({challenges, loggedInPlayer}) {
         <p className="filterLabel">Filters:</p>
         <p className={`filter-all ${(!filterOn) ? 'textBold' : ''}`} onClick={() => setFilterOn(false)}>All</p>
         <p className={`filter-mine ${(filterOn) ? 'textBold' : ''}`} onClick={() => setFilterOn(true)}>Mine</p>
-        <p className={getIconClasses('invited')} onClick={() => toggleStatusFlag('invited')}><Emoji symbol="📮"/></p>
-        <p className={getIconClasses('inviteAccepted')} onClick={() => toggleStatusFlag('inviteAccepted')}><Emoji symbol="🤝"/></p>
-        <p className={getIconClasses('inviteDeclined')} onClick={() => toggleStatusFlag('inviteDeclined')}><Emoji symbol="🚫"/></p>
-        <p className={getIconClasses('complete')} onClick={() => toggleStatusFlag('complete')}><Emoji symbol="✅"/></p>
+        <p className={getIconClasses('invited')} tooltiptext="Awaiting response" onClick={() => toggleStatusFlag('invited')}><Emoji symbol="📮"/><span className="tooltiptext"></span></p>
+        <p className={getIconClasses('inviteAccepted')} tooltiptext="Challenge cccepted" onClick={() => toggleStatusFlag('inviteAccepted')}><Emoji symbol="🤝"/></p>
+        <p className={getIconClasses('inviteDeclined')} tooltiptext="Challenge declined" onClick={() => toggleStatusFlag('inviteDeclined')}><Emoji symbol="🚫"/></p>
+        <p className={getIconClasses('complete')} tooltiptext="Complete" onClick={() => toggleStatusFlag('complete')}><Emoji symbol="✅"/></p>
       </div>
       <div className="latestResults">
         {getChallengesToShow()
