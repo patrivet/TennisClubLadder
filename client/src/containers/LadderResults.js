@@ -11,7 +11,7 @@ export default function LadderResults({challenges, loggedInPlayer}) {
     if (!filterOn) {
       return challenges.filter( (c) => statusFlags.includes(c.status) );
     } else if (filterOn) {
-      return challenges.filter( (c) => statusFlags.includes(c.status) && (c.challengerId == loggedInPlayer._id || c.challengedId == loggedInPlayer._id) );//
+      return challenges.filter( (c) => statusFlags.includes(c.status) && (c.challengerId === loggedInPlayer._id || c.challengedId === loggedInPlayer._id) );//
     }
   }
 
@@ -19,10 +19,10 @@ export default function LadderResults({challenges, loggedInPlayer}) {
     // Finds the object with status and toggles true/false / false/true;
     const foundIndex = statusFlags.indexOf(statusName);
     const statusFlagsCopy = [...statusFlags];
-    if (foundIndex != -1) { // remove it
+    if (foundIndex !== -1) { // remove it
       // Remove the status at foundIndex
       statusFlagsCopy.splice(foundIndex, 1);
-      setStatusFlags( statusFlagsCopy )
+      setStatusFlags( statusFlagsCopy );
     }
     else {// indexOf is -1 - add this status
       statusFlagsCopy.push(statusName);
@@ -30,17 +30,9 @@ export default function LadderResults({challenges, loggedInPlayer}) {
     }
   }
 
-  function statusIsSelected (statusName) {
-    return (statusFlags.indexOf(statusName) == -1) ? false : true;
-  }
-
   function getIconClasses(statusName) {
-    const isSelected = statusFlags.indexOf(statusName) != -1;
+    const isSelected = statusFlags.indexOf(statusName) !== -1;
     return `filter-${statusName} ${(!isSelected ? 'iconUnselected' : '')}`
-  }
-
-  function getTextClasses(filterOpt) {
-    return `filter-${filterOpt} ${(filterOn) ? 'textBold' : ''}`
   }
 
   return (

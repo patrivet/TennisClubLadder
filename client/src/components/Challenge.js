@@ -2,10 +2,8 @@ import React from 'react'
 import moment from 'moment';
 
 export default function Challenge({challenge}) {
-  const longDate = moment(challenge.lastUpdated).format("h:mm a - MMMM Do, YYYY");
   const dayOfMonth = moment(challenge.lastUpdated).format("Do");
   const month = moment(challenge.lastUpdated).format("MMM");
-  const time = moment(challenge.lastUpdated).format("HH:mm");
   const getStatusIcon = () => {
     switch (challenge.status) {
       case 'invited':
@@ -16,6 +14,7 @@ export default function Challenge({challenge}) {
         return '🚫';
       case 'complete':
         return '✅';
+      default: console.error(`Challenge: getStatusIcon(): ${challenge.status} doesn't have an emoij or is an incorrect status.`);
     }
   }
 

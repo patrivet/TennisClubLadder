@@ -23,7 +23,7 @@ export default function Ladder({players, loggedInPlayer, createChallenge, getPla
           {players
             .sort( (a, b) => (a.position > b.position) ? 1 : -1 )
             .map(player => {
-              if (player == loggedInPlayer) return <LadderPlayer classFlag="currentPlayer" loggedInPlayer={loggedInPlayer} key={player._id} player={player} createChallenge={createChallenge} getPlayerActiveChallenges={getPlayerActiveChallenges} />
+              if (player === loggedInPlayer) return <LadderPlayer classFlag="currentPlayer" loggedInPlayer={loggedInPlayer} key={player._id} player={player} createChallenge={createChallenge} getPlayerActiveChallenges={getPlayerActiveChallenges} />
               else return <LadderPlayer classFlag="noCurrentPlayer" loggedInPlayer={loggedInPlayer} key={player._id} player={player} createChallenge={createChallenge} getPlayerActiveChallenges={getPlayerActiveChallenges} />
           })}
         </tbody>

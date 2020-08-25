@@ -10,9 +10,9 @@ export default function PlayerChallengeAndResults({players, loggedInPlayer, chal
 
     // Get the player's open challenge (if there is one).
     const filtered = challenges.filter( (c) =>
-      (c.challengerId && c.challengerId == loggedInPlayer._id  || c.challengedId && c.challengedId == loggedInPlayer._id)
+      ((c.challengerId && c.challengerId === loggedInPlayer._id)  || (c.challengedId && c.challengedId === loggedInPlayer._id))
       &&
-      (c.status == 'invited' || c.status == 'inviteAccepted' || c.status == 'scheduled')
+      ((c.status === 'invited' )|| (c.status === 'inviteAccepted') || (c.status === 'scheduled'))
     );
 
     if (filtered.length> 1) console.log('WARNING: Player has more than one challenge is an open state. There should only be 0..1 per player.');
@@ -29,7 +29,6 @@ export default function PlayerChallengeAndResults({players, loggedInPlayer, chal
         <OpenChallenge players={players} loggedInPlayer={loggedInPlayer} nextChallenge={getNextChallenge()} updateChallenge={updateChallenge} updatePlayer={updatePlayer} />
       </div>
       <div className="myResultsLink">
-        <h3></h3>
       </div>
     </>
   )

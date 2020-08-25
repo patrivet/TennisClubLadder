@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import ApiService from './ApiService';
 import './Login.scss';
 import { Link } from 'react-router-dom';
@@ -20,7 +20,7 @@ export default function Login(props) {
     event.preventDefault();
     // Authentication check
     const { email, password } = state;
-    const res = await ApiService.JWTLogin(state.email, state.password);
+    const res = await ApiService.JWTLogin(email, password);
 
     if (!res) {
       setFailedAuth(true);

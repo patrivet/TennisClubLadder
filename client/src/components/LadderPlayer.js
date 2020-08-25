@@ -19,7 +19,7 @@ export default function LadderPlayer({classFlag, player, loggedInPlayer, createC
     const thisPlayerPos = player.position;
 
     // if player (this context) has a position below (well above numerically) in ladder - they can be challenged
-    if (loggedInPlayerPos == thisPlayerPos) {
+    if (loggedInPlayerPos === thisPlayerPos) {
       return false;
     }
     else if (getPlayerActiveChallenges(player).length) {
@@ -42,12 +42,14 @@ export default function LadderPlayer({classFlag, player, loggedInPlayer, createC
         return <Emoji symbol="↔️"/>
       case 1:
         return <Emoji symbol="⬆️"/>
+      default:
+        console.error(`LadderPlayer: getTrendIcon() - Incorrect trend enumeration =${player.trend}`)
     }
   }
 
   return (
     /* Ladder Table Row definition -------- -------- */
-    <tr className="tableRow" className={classFlag}>
+    <tr className={"tableRow " + classFlag}>
       <td>{player.position}</td>
       <td><img alt={player.firstName} src={playerImgPath} className="playerImage"></img></td>
       <td>{player.firstName + " " + player.lastName}</td>

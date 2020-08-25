@@ -1,10 +1,11 @@
-import React, { useState, createContext } from 'react';
+import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import App from './../App';
 import PlayerDetail from './../components/PlayerDetail';
 import Login from '../components/Login';
 import Header from './../components/Header';
 import Register from './../components/Register';
+const TIMEOUT_MINS = process.env.REACT_APP_TIMEOUT || 30;
 
 export default function Dashboard (props) {
 
@@ -16,9 +17,9 @@ export default function Dashboard (props) {
     const accessTokenPayload = atob(accessToken.split('.')[1]);
     const iat = JSON.parse(accessTokenPayload).iat;
 
-    // check curent time is <= the issued at time (iat) + 30 mins
+    // check curent time is <= the issued at time (iat) + timeout mins
     // 30 mins as millis // ((1000 * 60)*30);
-    const expireTime = (iat * 1000) + ((1000 * 60)*30);
+    const expireTime = (iat * 1000) + ((1000 * 60) * TIMEOUT_MINS);
     return (Date.now() <= expireTime);
   };
 

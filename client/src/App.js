@@ -17,7 +17,7 @@ import './components/Challenge.scss';
 import tennisBallSpinning from './imgs/tennis-ball-spinning.gif'
 
 function App() {
-  const [ladder, setLadder] = useState({});
+  // Ladder state not in use UFN.  const [ladder, setLadder] = useState({});
   const [players, setPlayers] = useState([]);
   const [challenges, setChallenges] = useState([]);
   const [dataFetched, setDataFetched] = useState(false);
@@ -26,7 +26,7 @@ function App() {
   useEffect( () => {
     console.log('INFO: app.js:: useEffect: fetching DB data..');
     Promise.all([ApiService.getLadders(), ApiService.getPlayers(), ApiService.getChallenges()]).then( (values) => {
-      setLadder(values[0][0]);
+      // Not in use UFN.  setLadder(values[0][0]);
       setPlayers(values[1]);
       const challenges = values[2];
       challenges.forEach( c => {
@@ -71,6 +71,7 @@ function App() {
     challenge.lastUpdated = Date.now();
 
     // === (b) player fields & ladder - done in openChallenge
+
 
     // ====== (2) DB update::: Update Challenge & player(s) object in DB
     ApiService.putChallenge(challenge);
@@ -130,7 +131,7 @@ function App() {
 
   function updatePlayer(id, updatedPlayer) {
     // get the player
-    const player = players.find(element => element._id == id);
+    const player = players.find(element => element._id === id);
 
     // override source on target
     Object.assign(player, updatedPlayer);
@@ -144,21 +145,21 @@ function App() {
   function setLoggedInPlayer () {
     // Local storage holds the authenticated session sessionEmail
     const sessionEmail = localStorage.getItem('sessionEmail');
-    loggedInPlayer = players.find( (player) =>  player.email == sessionEmail);
+    loggedInPlayer = players.find( (player) =>  player.email === sessionEmail);
     return loggedInPlayer
   }
 
   const getPlayerForId = (idToFind) => {
-    let playerFound = players.find(element => element._id == idToFind);
+    let playerFound = players.find(element => element._id === idToFind);
     if (!playerFound) console.log('WARNING: No player found with _id =', idToFind);
     return playerFound
   }
 
   function getPlayerActiveChallenges (player) {
     return challenges.filter( (c) =>
-    (c.challengerId && c.challengerId == player._id  || c.challengedId && c.challengedId == player._id)
+    ((c.challengerId && c.challengerId === player._id ) || (c.challengedId && c.challengedId === player._id))
     &&
-    (c.status == 'invited' || c.status == 'inviteAccepted' || c.status == 'scheduled'));
+    (c.status === 'invited' || c.status === 'inviteAccepted' || c.status === 'scheduled'));
   }
 
   return (
@@ -166,7 +167,7 @@ function App() {
       <QuoteRandomiser />
       { (!dataFetched)
         ? <div className="dataFetchingContainer">
-          <img className="dataFetchingImage" src={tennisBallSpinning}></img>
+          <img className="dataFetchingImage" alt="tennis-ball-spinner" src={tennisBallSpinning}></img>
         </div>
         :
         <>
