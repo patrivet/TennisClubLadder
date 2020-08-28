@@ -17,7 +17,12 @@ Created by:  [Pat Rivet](https://www.linkedin.com/in/pat-rivet/)
 	 - DB_URL=   your mongo database URL (see Database setup)
 	 - PORT=  your server's port number.
 	 - HOST=   your server's hostname.
-	
+	 - SECRET_KEY= your own chosen secret key (is used to sign access tokens).
+	 
+ - Create a ```.env``` file in the client directory and populate with the following:-	
+ 	 - REACT_APP_SERVER_URL=  URL to your server. Note: Defaults to http://localhost:3001 if not set.
+	 - REACT_APP_TIMEOUT=  Number of minutes a logged in session will last before being timed out. Note: Defaults to 30 minutes if not set.
+
 ### Database setup:
 To use TennisClubLadder, an initial import of dummy data is required. 
 Run the following command, replacing *<database_dump directory>* 
