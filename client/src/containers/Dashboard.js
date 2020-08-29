@@ -18,7 +18,6 @@ export default function Dashboard (props) {
     const iat = JSON.parse(accessTokenPayload).iat;
 
     // check curent time is <= the issued at time (iat) + timeout mins
-    // 30 mins as millis // ((1000 * 60)*30);
     const expireTime = (iat * 1000) + ((1000 * 60) * TIMEOUT_MINS);
     return (Date.now() <= expireTime);
   };
@@ -56,6 +55,5 @@ export default function Dashboard (props) {
           )}/>
         }
       </Switch>
-
   )
 }
