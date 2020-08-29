@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const controller = require('./controller/clubLadders.controller');
+const config = require('./config');
 
 // Ladder endpoints
 router.get('/ladders/', controller.getLadders);
@@ -16,5 +17,8 @@ router.put('/challenge', controller.putChallenge);
 
 // Auth
 router.post('/login', controller.login);
+
+// Server details
+router.get('/serverInfo', (_, res) => { res.json({env: config.NODE_ENV}) })
 
 module.exports = router;
