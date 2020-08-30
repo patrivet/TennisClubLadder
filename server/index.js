@@ -6,11 +6,16 @@ const cors = require('cors');
 const PORT = process.env.PORT || 3001;
 const router = require('./router.js');
 const morgan = require('morgan')
+const path = require('path');
 
 // Where the environment is set to production -serve client files from pre-built client dir
-// console.info(`INFO: Express: Environment =${config.NODE_ENV.toLowerCase()}`);
+console.info(`INFO: Express: Environment =${config.NODE_ENV.toLowerCase()}`);
 if (config.NODE_ENV.toLowerCase() == 'production') {
-  server.use(express.static('./../client/build'))
+  server.use(express.static('./../client/build'));
+
+  app.get('*', (_, res) => {
+    res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
+  });
 };
 
 server.use(morgan('combined'));
