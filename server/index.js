@@ -13,7 +13,7 @@ console.info(`INFO: Express: Environment =${config.NODE_ENV.toLowerCase()}`);
 if (config.NODE_ENV.toLowerCase() == 'production') {
   server.use(express.static('./../client/build'));
 
-  app.get('*', (_, res) => {
+  server.get('*', (_, res) => {
     res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
   });
 };
