@@ -1,5 +1,5 @@
 // Express dev(local) or prod server.
-const ENVIRONMENT = process.env.NODE_ENVIRONMENT;
+const ENVIRONMENT = process.env.NODE_ENV;
 
 const BASE_URL = (ENVIRONMENT == 'production')
   ? process.env.REACT_APP_SERVER_URL_PROD
