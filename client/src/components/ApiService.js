@@ -1,7 +1,14 @@
-// Express local server.
-const BASE_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:3001';
+// Express dev(local) or prod server.
+const ENVIRONMENT = process.env.NODE_ENVIRONMENT;
+
+const BASE_URL = (ENVIRONMENT == 'production')
+  ? process.env.REACT_APP_SERVER_URL_PROD
+  : process.env.REACT_APP_SERVER_URL|| 'http://localhost:3001';
+console.info(`INFO: ApiService using base URL =${BASE_URL}`);
 
 const fetchRequest = (url, options = {}) => {
+  console.info(`INFO: ApiService -fetchRequest to url =${BASE_URL}/${url}`);
+
   return fetch(`${BASE_URL}/${url}`, options)
     .then(res => res.status < 400 ? res : Promise.reject(res))
     .then(res => res.json())
