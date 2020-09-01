@@ -3,7 +3,7 @@ const config = require('./config');
 
 mongoose.connect(
   config.DB_URL, {
-    useFindAndModify: true,
+    useFindAndModify: false,
     useUnifiedTopology: true,
     useNewUrlParser: true
   },
