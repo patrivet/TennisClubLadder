@@ -3,6 +3,8 @@
 Tennis Club Ladder is web application which allows a tennis club to setup and run an internal singles challenge ladder.
 Players can see who is available to play, send and accept challenges to play, record results and see a filtered list of ladder updates.
 
+See the live app [here](https://tennis-club-ladder.herokuapp.com/) (See [**_login_**](#login) below for credentials to use)
+
 Created by:  [Pat Rivet](https://www.linkedin.com/in/pat-rivet/)
 
 ## Screenshots:
@@ -31,6 +33,14 @@ with the directory /data/DB_files/
 ```mongorestore -d <database_name> <database_dump_directory>```
 
 e.g. ```mongorestore -d tennis_ladder_db /data/DB_files/```
+
+
+## Login:<a name="login"></a>
+The following credentials can be used to login:-
+username: grant.shields@tennis.com
+password: tennis123
+
+Login with any other user by following the same format as above - i.e. combine with their first and last names, with a period inbetween, and use the same password   e.g. _firstName.lastName@tennis.com_
 
 ## Tech stack:
 
