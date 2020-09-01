@@ -11,7 +11,8 @@ mongoose.connect(
     if (err) {
       console.error(`MONGO connect encountered error =${err}`);
     } else {
-      console.log(`INFO: MONGO connected =${config.DB_URL}`);
+      // Don't output DB url info before the @ symbol - i.e. credentials.
+      console.log(`INFO: MONGO connected =${config.DB_URL.substring(config.DB_URL.indexOf('@'), config.DB_URL.length)}`);
     }
   }
 );

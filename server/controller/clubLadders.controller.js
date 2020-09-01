@@ -24,6 +24,7 @@ async function login (req, res) {
       loginError = 'Secret key is missing in .env file.';
       throw new Error()
     };
+    console.log('INFO: Login successful for user =' + user.email);
     const token = jwt.sign( {_id: user._id }, SECRET_KEY);
     res.status(200).json({ token });
 
@@ -100,9 +101,9 @@ async function putPlayer (req, res) {
     let updatedPlayer = req.body;
 
     // Encrypt password if body contains one.
+    // FIX bug - where password no longer worked following this call..Changed to remove the password from object if found
     if (req.body.password) {
-      const password = req.body.password;
-      updatedPlayer = {...req.body, password: await hashValue(password)}
+      delete updatedPlayer.password; // Note: will this remove the value from mongo document also?
     }
 
     let player = await playerModel.findOneAndUpdate({_id}, updatedPlayer, {

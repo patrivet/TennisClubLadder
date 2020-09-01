@@ -1,7 +1,7 @@
 // Express dev(local) or prod server.
 const ENVIRONMENT = process.env.NODE_ENV;
 
-const BASE_URL = (ENVIRONMENT == 'production')
+const BASE_URL = (ENVIRONMENT === 'production')
   ? process.env.REACT_APP_SERVER_URL_PROD
   : process.env.REACT_APP_SERVER_URL|| 'http://localhost:3001';
 console.info(`INFO: ApiService using base URL =${BASE_URL}`);
