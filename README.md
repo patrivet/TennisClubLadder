@@ -38,7 +38,7 @@ e.g. ```mongorestore -d tennis_ladder_db /data/DB_files/```
 ## Login:<a name="login"></a>
 The following credentials can be used to login:-
 username: grant.shields@tennis.com
-password: tennis123
+password: ladder123
 
 Login with any other user by following the same format as above - i.e. combine with their first and last names, with a period inbetween, and use the same password   e.g. _firstName.lastName@tennis.com_
 
