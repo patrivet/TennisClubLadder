@@ -9,7 +9,7 @@ async function login (req, res) {
   const { email, password } = req.body;
   let loginError = 'Username or password is incorrect';
   try {
-    const user = await playerModel.findOne({email: email});
+    const user = await playerModel.findOne({email: email.toLowerCase()});
     if (!user) {
       loginError = 'No user found with email= ' + email;
       throw new Error()
