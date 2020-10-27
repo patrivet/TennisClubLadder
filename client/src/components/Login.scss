@@ -14,6 +14,7 @@
     .login__title {
       margin-bottom: 15px;
       color: $primaryColor;
+      color: $fontColor1;
     }
   }
 
@@ -22,7 +23,6 @@
   width: 100vw;
   align-items: center;
   justify-content: center;
-  background-color: $tertiaryColor;
 
   .login__form {
     display: flex;
@@ -35,30 +35,33 @@
     padding-left: 6px;
   }
 
-  button:focus, input:focus {
+  button:focus,
+  input:focus {
     outline-color: $primaryColor;
     outline: none;
   }
 
   button {
     color: white;
-    background-color: $primaryColor;
+    background-color: $fontColor1;
     text-align: center;
     font-weight: bold;
     cursor: pointer;
   }
 
-  button:focus, button:hover {
+  button:focus,
+  button:hover {
     background-color: $secondaryColor;
     border-color: $secondaryColor;
   }
 
-  input, button {
+  input,
+  button {
     font-family: 'Archivo', sans-serif;
     font-size: 16px;
     width: 230px;
     border-radius: 7px;
-    border: 1px solid $primaryColor;
+    border: 1px solid $fontColor1;
     margin-bottom: 6px;
   }
 

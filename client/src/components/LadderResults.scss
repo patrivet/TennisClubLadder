@@ -1,3 +1,5 @@
+@import '../variables';
+
 .ladderResults {
   .title {
     text-align: center;
@@ -102,7 +104,7 @@
 
     .latestResults {
       // box-shadow: 5px 5px 4px #888888;
-      background-color: rgb(185, 230, 198);
+      background-color: $backgroundColor2;
       box-shadow: 2px 2px 2px 2px #888888;
       border-radius: 5px;
       height: 47vh;

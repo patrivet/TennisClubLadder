@@ -18,9 +18,9 @@ export default function Header(props) {
       <div className="headerLogoContainer">
         <img alt="ATP Cup logo" src={logo} className="headerLogo"></img>
       </div>
-      <div className="headerTitle">
-        Club Challenge Ladder
-      </div>
+      <h1 className="headerTitle">
+        : : CLUB LADDER : :
+      </h1>
         <div className="logoutContainer">
           <img alt="logout" src={logoutImage} className="logoutImage" onClick={() => handleLogout()}></img>
         </div>

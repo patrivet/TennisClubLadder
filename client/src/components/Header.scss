@@ -1,36 +1,36 @@
 .headerContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 
-    .headerLogoContainer {
-    }
+  .headerLogoContainer {
+  }
 
-    .headerTitle {
-      font-weight: 500;
-      font-size: 25px;
-    }
+  .headerTitle {
+    // font-weight: 500;
+    // font-size: 25px;
+  }
 
-    .headerLogo {
-      /* orig dimensions are 1200 × 974 */
-      width: 60px;
-      height: 48.7px;
-      cursor: pointer;
-    }
+  .headerLogo {
+    /* orig dimensions are 1200 × 974 */
+    width: 60px;
+    height: 48.7px;
+    cursor: pointer;
+  }
 
-    .logoutContainer {
-    }
+  .logoutContainer {
+  }
 
-    .logoutImage {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-    }
-    .settingsContainer {
-    }
-    .settingsImage {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-    }
+  .logoutImage {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  .settingsContainer {
+  }
+  .settingsImage {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
 }
