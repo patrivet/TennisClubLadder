@@ -167,6 +167,7 @@ function App() {
       <QuoteRandomiser />
       { (!dataFetched)
         ? <div className="dataFetchingContainer">
+          <h2>Loading ladder...</h2>
           <img className="dataFetchingImage" alt="tennis-ball-spinner" src={tennisBallSpinning}></img>
         </div>
         :

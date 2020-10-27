@@ -14,12 +14,12 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	// font-size: 100%;
-	// font: inherit;
-	vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  // font-size: 100%;
+  // font: inherit;
+  vertical-align: baseline;
 }
 
 body {
@@ -51,6 +51,7 @@ table {
   height: 60vh;
 
   .dataFetchingImage {
+    padding: 20px 0;
     width: 200px;
     height: 200px;
   }
@@ -67,8 +68,6 @@ table {
     width: 40%;
 
     .playerChallengeAndResults {
-
-
     }
 
     .ladderResults {

@@ -3,7 +3,8 @@ import Emoji from './Emoij.js';
 
 export default function LadderPlayer({classFlag, player, loggedInPlayer, createChallenge, getPlayerActiveChallenges}) {
   // Use the default player image if player doesn't have one uploaded.
-  const playerImgPath = (player.imagePath) ? player.imagePath : `/icons8-person-64.png`;
+  //const playerImgPath = (player.imagePath) ? player.imagePath : `/icons8-person-64.png`;
+  const playerImgPath = (player.imagePath) ? player.imagePath : `/user-profile.png`;
 
   const handleChallengeCreate = () => {
     createChallenge(player);

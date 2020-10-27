@@ -1,22 +1,17 @@
 .playerImage {
   width: 40px;
   height: 40px;
+  border-radius: 50%;
 }
 
 tr.currentPlayer {
-    outline: thick dotted #32a1ce;
-    //outline: thick double #32a1ce;
-    td {
-      /* Overide the border bottom on this td */
-      border-bottom: 0px;
-    }
+  outline: thick dotted #32a1ce;
+  td {
+    /* Overide the border bottom on this td */
+    border-bottom: 0px;
+  }
 }
-
-
 
 .challengeImage {
   cursor: pointer;
-
-
-
 }
