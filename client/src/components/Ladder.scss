@@ -1,13 +1,16 @@
+.ladderTable__title {
+  text-align: center;
+}
 /* grey line under each player #FDFDFD */
-.ladderTable{
+.ladderTable {
   /* grey line under each player #FDFDFD */
   td,
   th {
-    border-bottom: 1px solid #e1e1e1;  /* 0.1rem */
+    border-bottom: 1px solid #e1e1e1; /* 0.1rem */
     // padding: 1.0rem 1.3rem;   /* top, bot ||  left, right */
 
     padding-top: 0.9rem;
-    padding-bottom: 0.0rem;
+    padding-bottom: 0rem;
     padding-left: 1.3rem;
     padding-right: 1.3rem;
     text-align: left;

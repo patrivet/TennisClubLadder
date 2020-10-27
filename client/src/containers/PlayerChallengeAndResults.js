@@ -23,7 +23,7 @@ export default function PlayerChallengeAndResults({players, loggedInPlayer, chal
   return (
     <>
       <div className="title">
-        <h3>My next game</h3>
+        <h2>My next game</h2>
       </div>
       <div className="nextChallenge">
         <OpenChallenge players={players} loggedInPlayer={loggedInPlayer} nextChallenge={getNextChallenge()} updateChallenge={updateChallenge} updatePlayer={updatePlayer} />

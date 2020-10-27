@@ -6,6 +6,7 @@ export default function Ladder({players, loggedInPlayer, createChallenge, getPla
   return (
     /* Ladder Table with headers -------- -------- */
     <>
+      <h2 className="ladderTable__title">Latest Standings</h2>
       <table className="ladderTable">
         <thead>
           <tr>

@@ -39,7 +39,7 @@ export default function LadderResults({challenges, loggedInPlayer}) {
     /* Return last 20? challenges in status invited, complete or inviteAccepted, sort descending lastUpdated */
     <div className="ladderResultContainer">
       <div className="title">
-        <h3>Ladder history</h3>
+        <h2>Ladder history</h2>
       </div>
       <div className="filterContainer">
         <p className="filterLabel">Filters:</p>
