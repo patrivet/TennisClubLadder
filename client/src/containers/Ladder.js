@@ -1,6 +1,6 @@
 import React from 'react';
 import LadderPlayer from './../components/LadderPlayer';
-import Emoji from './../components/Emoij.js';
+import Emoji from '../components/Emoji';
 
 export default function Ladder({players, loggedInPlayer, createChallenge, getPlayerActiveChallenges}) {
   return (

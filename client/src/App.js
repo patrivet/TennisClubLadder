@@ -8,12 +8,12 @@ import PlayerChallengeAndResults from './containers/PlayerChallengeAndResults';
 import LadderResults from './containers/LadderResults';
 import QuoteRandomiser from './components/QuoteRandomiser';
 
-import './components/LadderPlayer.scss';
-import './components/Ladder.scss';
-import './components/PlayerChallengeAndResults.scss';
-import './components/LadderResults.scss';
-import './components/OpenChallenge.scss';
-import './components/Challenge.scss';
+import './components/LadderPlayer/LadderPlayer.scss';
+import './containers/Ladder.scss';
+import './containers/PlayerChallengeAndResults.scss';
+import './containers/LadderResults.scss';
+import './components/OpenChallenge/OpenChallenge.scss';
+import './components/Challenge/Challenge.scss';
 import tennisBallSpinning from './imgs/tennis-ball-spinning.gif'
 
 function App() {

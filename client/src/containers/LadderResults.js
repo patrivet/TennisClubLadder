@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Challenge from '../components/Challenge'
-import Emoji from './../components/Emoij.js';
+import Emoji from '../components/Emoji';
 
 export default function LadderResults({challenges, loggedInPlayer}) {
   const [ filterOn, setFilterOn ] = useState(false);

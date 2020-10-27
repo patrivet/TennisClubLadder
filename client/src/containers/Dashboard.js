@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import App from './../App';
-import PlayerDetail from './../components/PlayerDetail';
+import PlayerDetail from '../components/PlayerDetail';
 import Login from '../components/Login';
 import Header from './../components/Header';
 import Register from './../components/Register';

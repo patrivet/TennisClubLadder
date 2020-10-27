@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import ApiService from './ApiService';
+import ApiService from '../ApiService';
 import './Login.scss';
 import { Link } from 'react-router-dom';
-import Emoji from './Emoij';
+import Emoji from '../Emoji';
 
 export default function Login(props) {
   const [ state, setState ] = useState({ email: '', password : ''});

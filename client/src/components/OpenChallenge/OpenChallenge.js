@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Emoji from './Emoij.js';
+import Emoji from '../Emoji';
 import moment from 'moment';
 
 export default function OpenChallenge({players, loggedInPlayer, nextChallenge, updateChallenge, updatePlayer}) {

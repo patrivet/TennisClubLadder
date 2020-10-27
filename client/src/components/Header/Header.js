@@ -1,6 +1,6 @@
 import React from 'react'
-import logo from '../imgs/1200px-ATP_Cup_logo.svg.png'
-import logoutImage from '../exit-64.png'
+import logo from '../../imgs/1200px-ATP_Cup_logo.svg.png'
+import logoutImage from '../../exit-64.png'
 import './Header.scss';
 
 export default function Header(props) {

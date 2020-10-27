@@ -1,5 +1,5 @@
 import React from 'react';
-import Emoji from './Emoij.js';
+import Emoji from '../Emoji';
 
 export default function LadderPlayer({classFlag, player, loggedInPlayer, createChallenge, getPlayerActiveChallenges}) {
   // Use the default player image if player doesn't have one uploaded.
