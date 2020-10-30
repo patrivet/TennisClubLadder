@@ -2,10 +2,16 @@ $primaryColor: #379b5e;
 $secondaryColor: #40ad6a;
 $tertiaryColor: #a7cbb3;
 
-$backgroundColor1: #a7cbb3;
-$backgroundColor2: rgb(185, 230, 198);
+// Main background colour
+$backgroundColor1: white; // #a7cbb3;
+
+// Background of Next game & results panels.
+$backgroundColor2: white; // rgb(185, 230, 198);
 
 // $tertiaryColor: #E2F7F8; Green off White - replaced by above.
 
 /* Header element font color */
 $fontColor1: darkgreen;
+
+// Border & table column line.
+$borderColor: darkgreen;

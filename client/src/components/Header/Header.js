@@ -1,5 +1,6 @@
 import React from 'react'
-import logo from '../../imgs/1200px-ATP_Cup_logo.svg.png'
+//import logo from '../../imgs/1200px-ATP_Cup_logo.svg.png'
+import logo from '../../imgs/tennis-balls-racket-tennis-centre.png'
 import logoutImage from '../../exit-64.png'
 import './Header.scss';
 
@@ -19,7 +20,7 @@ export default function Header(props) {
         <img alt="ATP Cup logo" src={logo} className="headerLogo"></img>
       </div>
       <h1 className="headerTitle">
-        : : CLUB LADDER : :
+        CLUB LADDER
       </h1>
         <div className="logoutContainer">
           <img alt="logout" src={logoutImage} className="logoutImage" onClick={() => handleLogout()}></img>
