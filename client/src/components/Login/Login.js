@@ -3,6 +3,7 @@ import ApiService from '../ApiService';
 import './Login.scss';
 import { Link } from 'react-router-dom';
 import Emoji from '../Emoji';
+import logo from '../../imgs/FAVPNG_tennis-ball-racket-squash_H6gMq096.png'
 
 export default function Login(props) {
   const [ state, setState ] = useState({ email: '', password : ''});
@@ -44,7 +45,7 @@ export default function Login(props) {
   return (
     <div className="login">
       <div className="login__titleContainer">
-        <div className="login__tennisEmoij"><Emoji symbol="🎾"/></div>
+        <img className="login__logo" src={logo}/>
         <h2 className="login__title">Club Ladder</h2>
       </div>
       <form className="login__form" onSubmit={handleFormSubmit}>
