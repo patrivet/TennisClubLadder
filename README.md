@@ -45,6 +45,14 @@ Login with any other user by following the same format as above - i.e. combine w
 ## Tech stack:
 
 **Front-end:**
-React, Sass.
+- React
+- Sass
+- React-router
+
 **Back-end:**
-Node.js, Express.js, MongoDB, Mongoose.
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT
+- Bcrypt
