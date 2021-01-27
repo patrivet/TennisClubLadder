@@ -44,15 +44,14 @@ Login with any other user by following the same format as above - i.e. combine w
 
 ## Tech stack:
 
-**Front-end:**
-- (React)[https://reactjs.org/]
-- (Sass)[https://sass-lang.com/]
-- (React-router)[https://reactrouter.com/]
+- [React](https://reactjs.org/)
+- [Sass](https://sass-lang.com/)
+- [React-router](https://reactrouter.com/)
 
 **Back-end:**
-- (Node.js)[https://nodejs.org/]
-- (Express.js)[https://expressjs.com/]
-- (MongoDB)[https://www.mongodb.com/]
-- (Mongoose)[https://mongoosejs.com/]
-- (JWT)[https://www.npmjs.com/package/jsonwebtoken]
-- (Bcrypt)[https://www.npmjs.com/package/bcrypt]
+- [Node.js](https://nodejs.org/)
+- [Express.js](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [Mongoose](https://mongoosejs.com/)
+- [JWT](https://www.npmjs.com/package/jsonwebtoken)
+- [Bcrypt](https://www.npmjs.com/package/bcrypt)
