@@ -4,132 +4,142 @@ const Schema = db.Schema;
 // Challenge Model ==========================
 var ChallengeSchema = new Schema({
   id: {
-    type: String
+    type: String,
   },
   created: {
     type: Date,
     required: true,
-    default: Date.now()
+    default: Date.now(),
   },
   invitationStatus: {
     type: String,
     required: false,
-    default: 'sent'
+    default: 'sent',
   },
   resultStatus: {
     type: String,
     required: false,
-    default: 'n/a'
+    default: 'n/a',
   },
-  status: {   // this replaces, and merges, invitationStatus and resultStatus into one field.
-  // Values move from: invited --> inviteAccepted / inviteDeclined / inviteExpired --> [ scheduled ]  --> complete --> challengeExpired.
+  status: {
+    // this replaces, and merges, invitationStatus and resultStatus into one field.
+    // Values move from: invited --> inviteAccepted / inviteDeclined / inviteExpired --> [ scheduled ]  --> complete --> challengeExpired.
     type: String,
     required: false,
-    default: 'invited'
+    default: 'invited',
   },
   // challenger is a player ID
   challengerId: {
     type: String,
-    required: false
+    required: false,
   },
   challenger: {
     type: Object,
-    required: false
+    required: false,
   },
   challenged: {
     type: Object,
-    required: false
+    required: false,
   },
   winner: {
     type: Object,
-    required: false
+    required: false,
   },
   loser: {
     type: Object,
-    required: false
+    required: false,
   },
   // challengedId is a player ID (the challengedId player)
   challengedId: {
     type: String,
-    required: false
+    required: false,
   },
   // Winner is a player ID
   winnerId: {
     type: String,
-    required: false
+    required: false,
   },
   loserId: {
     type: String,
-    required: false
+    required: false,
   },
   commentary: {
     type: String,
-    required: false
+    required: false,
   },
   playedDate: {
     type: Date,
-    required: false
+    required: false,
   },
   playerIds: {
-    type: [String], required: true
+    type: [String],
+    required: true,
   },
   lastUpdated: {
     type: Date,
     required: true,
-    default: Date.now()
+    default: Date.now(),
   },
   statusSummaryText: {
     type: String,
-    required: false
+    required: false,
   },
   winningScore: {
     type: String,
-    required: false
+    required: false,
   },
 });
-const challengeModel = db.model("Challenge", ChallengeSchema);
+const challengeModel = db.model('Challenge', ChallengeSchema);
 
 // Player Model ==========================
 const PlayerSchema = new Schema({
   id: {
-    type: String, required: false
+    type: String,
+    required: false,
   },
   firstName: {
-    type: String, required: true
+    type: String,
+    required: true,
   },
   lastName: {
-    type: String, required: true
+    type: String,
+    required: true,
   },
   email: {
-    type: String, required: true
+    type: String,
+    required: true,
   },
   password: {
-    type: String, required: true
+    type: String,
+    required: true,
   },
   isAdmin: {
-    type: Boolean, default: false
+    type: Boolean,
+    default: false,
   },
   // FIX ME: this object array may not be used from the client. Remove (along with others) if not used.
   challenges: {
-    type: [ChallengeSchema], required: false
+    type: [ChallengeSchema],
+    required: false,
   },
   challengeIds: {
-    type: [String], required: false
+    type: [String],
+    required: false,
   },
   position: { type: Number, required: false },
-  numWins: { type: Number, required: false },
+  numWins: { type: Number, default: 0 },
   // Note: can use shorthand->  numWins: Number,
-  numLosses: { type: Number, required: false },
+  numLosses: { type: Number, default: 0 },
   imagePath: { type: String, required: false },
   form: {
     type: [String],
     default: ['-', '-', '-'],
-    required: false
+    required: false,
   },
   trend: {
     type: Number,
     default: 0,
-    required: false
+    required: false,
   },
 });
 const playerModel = db.model('Player', PlayerSchema);
@@ -137,23 +147,26 @@ const playerModel = db.model('Player', PlayerSchema);
 // Ladder Model ==========================
 const LadderSchema = new Schema({
   name: {
-    type: String, required: true
+    type: String,
+    required: true,
   },
   settings: {
-    maxSets: {type: Number, default: 3},
-    finalSetTiebreak: {type: Boolean, default: true},
+    maxSets: { type: Number, default: 3 },
+    finalSetTiebreak: { type: Boolean, default: true },
   },
   players: {
-    type: [PlayerSchema], required: false
+    type: [PlayerSchema],
+    required: false,
   },
   playerIds: {
-    type: [String], required: false
-  }
+    type: [String],
+    required: false,
+  },
 });
 const ladderModel = db.model('Ladder', LadderSchema);
 
 module.exports = {
   ladderModel,
   playerModel,
-  challengeModel
-}
+  challengeModel,
+};

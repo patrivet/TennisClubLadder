@@ -8,6 +8,7 @@ router.post('/ladder', controller.postLadder);
 
 // Players and Challenges
 router.get('/players', controller.getPlayers);
+// Add new player
 router.post('/player', controller.postPlayer);
 router.put('/player/:id', controller.putPlayer);
 
@@ -19,6 +20,8 @@ router.put('/challenge', controller.putChallenge);
 router.post('/login', controller.login);
 
 // Server details
-router.get('/serverInfo', (_, res) => { res.json({env: config.NODE_ENV}) })
+router.get('/serverInfo', (_, res) => {
+  res.json({ env: config.NODE_ENV });
+});
 
 module.exports = router;
