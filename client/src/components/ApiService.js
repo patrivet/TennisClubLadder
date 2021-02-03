@@ -10,13 +10,16 @@ console.info(`INFO: ApiService using base URL =${BASE_URL}`);
 const fetchRequest = (url, options = {}) => {
   console.info(`INFO: ApiService -fetchRequest to url =${BASE_URL}/${url}`);
 
-  return fetch(`${BASE_URL}/${url}`, options)
-    .then(res => (res.status < 400 ? res : Promise.reject(res)))
-    .then(res => res.json())
-    .catch(error => {
-      console.log(`error while fetching /${url} =`);
-      console.error(error);
-    });
+  return (
+    fetch(`${BASE_URL}/${url}`, options)
+      // .then(res => (res.status < 400 ? res : Promise.reject(res)))
+      // ! why was the promise reject placed here?
+      .then(res => res.json())
+      .catch(error => {
+        console.log(`error while fetching /${url} =`);
+        console.error(error);
+      })
+  );
 };
 
 // Generate a headers object. Assumes using JSON for response and request.

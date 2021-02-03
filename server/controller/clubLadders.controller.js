@@ -74,8 +74,9 @@ async function getPlayers(_, res) {
   }
 }
 
-/* This is for adding a new player */
+/* This is for registering a new player, and returning a JWT for login. */
 async function postPlayer(req, res) {
+  let errorMsg;
   try {
     const { firstName, lastName, email, password } = req.body;
     if (!firstName || !lastName || !email || !password) {
@@ -83,8 +84,9 @@ async function postPlayer(req, res) {
     }
     // If a Player with this email already exists - return here - else continue
     if (await playerModel.findOne({ email: email })) {
-      res.status(409);
-      res.json({ error: 'This User already exists.' });
+      return res
+        .status(409)
+        .json({ status: 409, error: 'A User with this email already exists.' });
     }
 
     // Encrypt password.
@@ -96,12 +98,19 @@ async function postPlayer(req, res) {
       position: (await playerModel.countDocuments()) + 1,
       password: passwordHash,
     });
-    res.sendStatus(200);
-    res.json(player);
+
+    // Generate login token and return it.
+    if (!SECRET_KEY.length) {
+      errorMsg = 'Secret key is missing in .env file.';
+      throw new Error();
+    }
+    console.log('INFO: Register & Login successful for user =' + player.email);
+    const token = jwt.sign({ _id: player._id }, SECRET_KEY);
+    res.status(200).json({ token });
   } catch (error) {
     console.log('ERROR: running /POST player =', error);
     res.status(400);
-    res.json({ serverError: `ERROR: Express Server:: ${error}` });
+    res.json({ error: errorMsg });
   }
 }
 
