@@ -4,7 +4,7 @@
   "description": "SPA to run a tennis clubs challenge ladder",
   "main": "index.js",
   "dependencies": {
-    "ejs": "^3.1.3",
+    "ejs": "^3.1.7",
     "dotenv": "^8.2.0"
   },
   "engines": {
